@@ -15,7 +15,8 @@
     "pretest": "npm run lint",
     "test": "exit 0",
     "start:watch": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed-database": "psql dumptest < ./jeopardy430pm0909.sql"
   },
   "author": "Sarah Flynn",
   "license": "ISC",
@@ -28,6 +29,6 @@
   },
   "devDependencies": {
     "eslint": "^4.19.1",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.18.4"
   }
 }
