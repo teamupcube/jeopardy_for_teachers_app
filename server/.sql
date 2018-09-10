@@ -1,0 +1,17 @@
+SET
+SET
+SET
+SET
+ set_config 
+------------
+ 
+(1 row)
+
+SET
+SET
+SET
+CREATE EXTENSION
+COMMENT
+SET
+SET
+COPY 357719
