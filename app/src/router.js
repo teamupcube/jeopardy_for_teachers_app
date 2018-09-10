@@ -13,3 +13,4 @@ export default new VueRouter({
     { path: '/form', component: CategoryForm },
     { path: '*', redirect: '/' }
   ]
+});
