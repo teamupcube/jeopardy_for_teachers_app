@@ -1,5 +1,5 @@
 const URL = '/api';
-const AUTH_URL = `$${URL}/auth`;
+const AUTH_URL = `${URL}/auth`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -40,6 +40,11 @@ export function signIn(credentials) {
       storeUser(user);
       return user;
     });
+}
+
+export function signOut() {
+  token = '';
+  window.localStorage.removeItem('user');
 }
 
 function storeUser(user) {
