@@ -3,7 +3,10 @@
     <header>
       <RouterLink v-if="!user" to="/auth">Sign in</RouterLink>
       <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
+      <router-link to="new"></router-link>
+      <router-link to="/"></router-link>
       <span v-if="user">user: {{ user.email }}</span> 
+
     </header>
     <RouterView :onUser="handleUser"></RouterView>
   </div>
@@ -34,7 +37,7 @@ export default {
   created() {
     this.user = checkForToken();
   }
-}
+};
 </script>
 
 <style>
