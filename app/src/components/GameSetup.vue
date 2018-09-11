@@ -1,13 +1,27 @@
 <template>
   <div>
     <h1>Game Setup</h1>
-    <RouterView></RouterView>
+    <RouterView :onAdd="handleAddClassName"></RouterView>
   </div>
 </template>
 
 <script>
-export default {
 
+import AddClassName from './AddClassName';
+import AddTeamNames from './AddTeamNames';
+import { addGame } from '../services/api';
+
+export default {
+  components: {
+    AddClassName,
+    AddTeamNames
+  },
+  methods: {
+    handleAddClassName(game) {
+      console.log(game)
+      return addGame(game)
+    }
+  }
 };
 </script>
 
