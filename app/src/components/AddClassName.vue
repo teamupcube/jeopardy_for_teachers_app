@@ -2,10 +2,18 @@
   <div>
     <form @submit.prevent="handleSubmit">
       <h2>Select a Board</h2>
-      <BoardList :boards="boards"/>
+      <ul>
+        <label v-if="boards" v-for="board in boards" 
+          :key="board.id" 
+          class="board">
+          <input type="radio" :value="board.id" v-model="boardId">
+          {{ board.name }}
+        </label>
+      </ul>
       <h2>Add Class Name</h2>
       <label>
-        Class Name: <input type="text" v-model="className"> 
+        Class Name: 
+        <input type="text" v-model="className"> 
       </label>
       <button @click="handleNext">Next</button>
     </form>
@@ -14,7 +22,6 @@
 
 <script>
 
-import BoardList from './BoardList';
 import { getBoards } from '../services/api'
 
 export default {
@@ -25,7 +32,8 @@ export default {
   data() {
     return {
       className: '',
-      boards: null
+      boards: null,
+      boardId: null
     }
   },
   computed: {
@@ -33,11 +41,11 @@ export default {
       return this.game === undefined;
     }
   },
-  created() {
-    const game = this.game;
-    if(this.isNew) return;
-    this.className = game.className;
-  },
+  // created() {
+  //   const game = this.game;
+  //   if(this.isNew) return;
+  //   this.className = game.className;
+  // },
   created() {
     getBoards()
       .then(boards => {
@@ -49,18 +57,17 @@ export default {
   },
   methods: {
     handleNext() {
-      this.$router.push('team-names');
+      // this.$router.push('team-names');
     },
     handleSubmit() {
       const game = {
         className: this.className,
-        boardId: this.board.id
+        boardId: this.boardId
       }
       return this.onAdd(game);
     }
   },
   components: {
-    BoardList
   }
 };
 </script>
