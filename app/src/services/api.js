@@ -20,10 +20,10 @@ function getHeaders() {
 }
 
 export function getBoards() {
-  return fecth (BOARDS_URL, {
+  return fetch (BOARDS_URL, {
     headers: getHeaders()
   })
-    .then(responseHandler)
+    .then(responseHandler);
 }
 
 export function addGame(game) {
@@ -32,7 +32,7 @@ export function addGame(game) {
     headers: getHeaders(),
     body: JSON.stringify(game)
   })
-    .then(responseHandler)
+    .then(responseHandler);
 }
 
 export function signUp(credentials) {

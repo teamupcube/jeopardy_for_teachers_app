@@ -18,8 +18,8 @@ export default {
   },
   methods: {
     handleAddClassName(game) {
-      console.log(game)
-      return addGame(game)
+      console.log(game);
+      return addGame(game);
     }
   }
 };
