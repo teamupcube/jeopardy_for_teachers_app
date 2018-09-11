@@ -3,6 +3,7 @@ const AUTH_URL = `${URL}/auth`;
 const SEARCH_URL = `${URL}/search`;
 const GAMES_URL = `${URL}/games`;
 const BOARDS_URL = `${URL}/boards`;
+const TEAMS_URL = `${URL}/teams`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -31,6 +32,15 @@ export function addGame(game) {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(game)
+  })
+    .then(responseHandler);
+}
+
+export function addTeam(team) {
+  return fetch(TEAMS_URL, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(team)
   })
     .then(responseHandler);
 }

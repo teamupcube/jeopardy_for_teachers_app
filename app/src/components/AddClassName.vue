@@ -22,7 +22,7 @@
 
 <script>
 
-import { getBoards } from '../services/api'
+import { getBoards } from '../services/api';
 
 export default {
   props: {
@@ -34,7 +34,7 @@ export default {
       className: '',
       boards: null,
       boardId: null
-    }
+    };
   },
   computed: {
     isNew() {
@@ -57,13 +57,13 @@ export default {
   },
   methods: {
     handleNext() {
-      // this.$router.push('team-names');
+      this.$router.push('team-names');
     },
     handleSubmit() {
       const game = {
         className: this.className,
         boardId: this.boardId
-      }
+      };
       return this.onAdd(game);
     }
   },
