@@ -13,13 +13,21 @@
       </div>
       <button>Search</button>
     </form>
+    <div v-if="clues">
+      <h4>Results</h4>
+      <p>Category: {{clues[0].category}}</p>
+      <p>Clue: {{clues[0].clue}}</p>
+      <p>Answer: {{clues[0].answer}}</p>
+      <p>Historic Point Value: {{clues[0].value}}</p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    onSearch: Function
+    onSearch: Function,
+    clues: Array
   },
   data() {
     return {
