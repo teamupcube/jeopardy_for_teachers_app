@@ -14,25 +14,28 @@
       <button>Search</button>
     </form>
     <div 
-      v-if="clues"
-      v-for="(clue) in clues"
-      :key="clue.id">
+      v-if="historicClues"
+      v-for="(historicClue) in historicClues"
+      :key="historicClue.id">
       <div>
         <h4>Results</h4>
-        <p>Category: {{clues[0].category}}</p>
-        <p>Clue: {{clues[0].clue}}</p>
-        <p>Answer: {{clues[0].answer}}</p>
-        <p>Historic Point Value: {{clues[0].value}}</p>
-       <label><input type="checkbox" name="selected" value=true>Add to your game board</label><br/>
-        <label>Select point value
-          <select name="value">
-          <option value="100">100</option>
-          <option value="200">200</option>
-          <option value="300">300</option>
-          <option value="400">400</option>
-          <option value="500">500</option>
-        </select>
-        </label>
+        <p>Category: {{historicClue.category}}</p>
+        <p>Clue: {{historicClue.historicClue}}</p>
+        <p>Answer: {{historicClue.answer}}</p>
+        <p>Historic Point Value: {{historicClue.value}}</p>
+        <form @submit.prevent="handleAdd">
+          <label><input type="checkbox" name="selected" value=true>Use this clue</label><br/>
+          <label>Select point value
+            <select name="value">
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+          </select>
+          </label>
+          <button>Add to game board</button>
+        </form>
       </div>
     </div>
   </div>
@@ -42,7 +45,8 @@
 export default {
   props: {
     onSearch: Function,
-    clues: Array
+    historicClues: Array,
+    onAdd: Function
   },
   data() {
     return {

@@ -14,7 +14,7 @@
           :name="`category-name`" placeholder="Category" required>
       </div>
     </form>
-    <Search :clues="clues" :onSearch="handleSearch"/>
+    <Search :onAdd="handleAdd" :historicClues="clues" :onSearch="handleSearch"/>
 
   </div>
 
@@ -47,6 +47,12 @@ export default {
           return this.clues;
         });
     },
+    // handleAdd(clue) {
+    //   return addClue(clue)
+    //     .then(saved => {
+
+    //     });
+    // }
   }
 };
 
