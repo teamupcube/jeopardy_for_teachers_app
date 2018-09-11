@@ -14,10 +14,6 @@
           Username:
           <input v-model="credentials.name">
         </label>
-        <label>
-          Email:
-          <input v-model="credentials.email">
-        </label>
         <br>
         <label>
           Password:
@@ -51,7 +47,6 @@ export default {
     return {
       credentials: {
         name: '',
-        email: '',
         password: ''
       },
       show: false,
