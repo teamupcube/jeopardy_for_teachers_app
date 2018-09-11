@@ -3,12 +3,12 @@
     <header>
       <RouterLink v-if="!user" to="/auth">Sign in</RouterLink>
       <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
-      <router-link to="new"></router-link>
-      <router-link to="/"></router-link>
+      <router-link to="new" v-if="user"></router-link>
+      <router-link v-if="user" to="/"></router-link>
       <span v-if="user">user: {{ user.email }}</span> 
 
     </header>
-    <RouterView :onUser="handleUser"></RouterView>
+    <RouterView :onUser="handleUser" :user="user"></RouterView>
   </div>
 </template>
 

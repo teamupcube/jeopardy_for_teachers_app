@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Homepage</h1>
-     <router-link to="/new">Make New Game</router-link>
+    <h1>Game Setup</h1>
+    <RouterView></RouterView>
   </div>
 </template>
 

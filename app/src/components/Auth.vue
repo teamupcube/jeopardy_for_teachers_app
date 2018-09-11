@@ -52,7 +52,7 @@ export default {
       show: false,
       type: 'signIn',
       error: null
-    }
+    };
   },
   computed: {
     isSignUp() {
@@ -76,7 +76,7 @@ export default {
       action(this.credentials)
         .then(user => {
           this.onUser(user);
-          this.$router.push('/')
+          this.$router.push('/');
         })
         .catch(err => {
           this.error = err;
