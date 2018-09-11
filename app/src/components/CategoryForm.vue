@@ -14,6 +14,7 @@
           :name="`category${categoryNumber}-name`" placeholder="Category" required>
       </div>
     </form>
+    <Search :onSearch="handleSearch"/>
 
   </div>
 
@@ -21,9 +22,31 @@
 </template>
 
 <script>
-export default {
+import Search from './Search.vue';
+import api from '../services/api';
 
+export default {
+  data() {
+    return {
+      clues: '',
+      items: '',
+      search: ''
+    };
+  },
+  components: {
+    Search
+  },
   methods: {
+    handleSearch(search) {
+      this.search = search;
+      this.searchData();
+    },
+    searchData() {
+      api.getData(this.search)
+        .then(response => {
+          this.clues = response.items.map(clue => clue.clue);
+        });
+    }
   
   }
 

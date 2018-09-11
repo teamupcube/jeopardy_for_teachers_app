@@ -7,6 +7,7 @@ import GameSetup from './components/GameSetup';
 import AddClassName from './components/AddClassName';
 import AddTeamNames from './components/AddTeamNames';
 import Instructions from './components/Instructions';
+import Search from './components/Search';
 
 
 export default new VueRouter({
@@ -25,7 +26,13 @@ export default new VueRouter({
         { path: '', redirect: 'class-name' }
       ]
     },
-    { path: '/form', component: CategoryForm },
+    { 
+      path: '/form',
+      component: CategoryForm,
+      children: [
+        { path: '/search', component: Search }
+      ] 
+    },
     { path: '*', redirect: '/' }
   ]
 });
