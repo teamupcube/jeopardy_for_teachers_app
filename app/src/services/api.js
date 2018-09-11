@@ -1,5 +1,6 @@
 const URL = '/api';
 const AUTH_URL = `${URL}/auth`;
+const SEARCH_URL = `${URL}/search`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -61,4 +62,11 @@ export function checkForToken() {
   const user = JSON.parse(json);
   token = user.id;
   return user;
+}
+
+export function getData() {
+  return fetch(`${SEARCH_URL}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
 }

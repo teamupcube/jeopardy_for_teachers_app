@@ -11,7 +11,7 @@
       </div>
       <div>100 Point Answer: 
         <input class="category-text" type="text" 
-          :name="`category${categoryNumber}-name`" placeholder="Category" required>
+          :name="`category-name`" placeholder="Category" required>
       </div>
     </form>
     <Search :onSearch="handleSearch"/>
@@ -23,26 +23,26 @@
 
 <script>
 import Search from './Search.vue';
-import api from '../services/api';
+import { getData } from '../services/api';
 
 export default {
   data() {
     return {
       clues: '',
       items: '',
-      search: ''
+      keywords: ''
     };
   },
   components: {
     Search
   },
   methods: {
-    handleSearch(search) {
-      this.search = search;
+    handleSearch(keywords) {
+      this.keywords = keywords;
       this.searchData();
     },
     searchData() {
-      api.getData(this.search)
+      getData(this.keywords)
         .then(response => {
           this.clues = response.items.map(clue => clue.clue);
         });
