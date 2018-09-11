@@ -11,6 +11,10 @@
       <pre>{{ error }}</pre>
       <form @submit.prevent="handleSubmit">
         <label>
+          Username:
+          <input v-model="credentials.name">
+        </label>
+        <label>
           Email:
           <input v-model="credentials.email">
         </label>
@@ -46,6 +50,7 @@ export default {
   data() {
     return {
       credentials: {
+        name: '',
         email: '',
         password: ''
       },
