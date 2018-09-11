@@ -1,15 +1,23 @@
 <template>
-  <div>
-    <h2>Add Teams</h2>
+  <div class="teams">
     <form>
-      <label>
-        Team Name: <input type="text"> 
-      </label>
       <div class="team-list">
-        <button @click="handleAddTeam">Add</button>
-        <ul>
-          <li>LISTTTT</li>
-        </ul>    
+        
+        <div>
+          <h2>Add Teams</h2>
+          <label>
+            Team Name: <input type="text"> 
+          </label>
+          <button @click="handleAddTeam">Add</button>
+        </div>
+        
+        <div>
+          <h2>Your Teams</h2>
+          <ul> 
+            <li>LISTTTT</li>
+          </ul>
+        </div> 
+           
       </div>
       <button @click="handleNext">Done</button>
     </form>
@@ -30,6 +38,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.team-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.teams {
+  text-align: center;
+}
 
 </style>
