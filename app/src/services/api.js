@@ -1,5 +1,7 @@
 const URL = '/api';
 const AUTH_URL = `${URL}/auth`;
+const GAMES_URL = `${URL}/games`;
+const BOARDS_URL = `${URL}/boards`
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -14,6 +16,22 @@ function getHeaders() {
   const headers = { 'Content-type': 'application/json' };
   if(token) headers['Authorization'] = token;
   return headers;
+}
+
+export function getBoards() {
+  return fecth (BOARDS_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler)
+}
+
+export function addGame(game) {
+  return fetch(GAMES_URL, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(game)
+  })
+    .then(responseHandler)
 }
 
 export function signUp(credentials) {
@@ -62,3 +80,4 @@ export function checkForToken() {
   token = user.id;
   return user;
 }
+
