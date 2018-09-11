@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h2>Add Class Name</h2>
     <form @submit.prevent="handleSubmit">
+      <h2>Select a Board</h2>
+      <BoardList :boards="boards"/>
+      <h2>Add Class Name</h2>
       <label>
         Class Name: <input type="text" v-model="className"> 
       </label>
@@ -12,15 +14,18 @@
 
 <script>
 
+import BoardList from './BoardList';
+import { getBoards } from '../services/api'
 
 export default {
   props: {
     game: Object,
-    onAdd: Function
+    onAdd: Function,
   },
   data() {
     return {
-      className: ''
+      className: '',
+      boards: null
     }
   },
   computed: {
@@ -33,17 +38,30 @@ export default {
     if(this.isNew) return;
     this.className = game.className;
   },
+  created() {
+    getBoards()
+      .then(boards => {
+        this.boards = boards;
+      })
+      .catch(err => {
+        this.error = err;
+      });
+  },
   methods: {
     handleNext() {
-      // this.$router.push('team-names');
+      this.$router.push('team-names');
     },
     handleSubmit() {
       const game = {
-        className: this.className
+        className: this.className,
+        boardId: this.board.id
       }
       return this.onAdd(game);
     }
   },
+  components: {
+    BoardList
+  }
 };
 </script>
 
