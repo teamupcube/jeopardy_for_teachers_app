@@ -14,7 +14,7 @@
           :name="`category-name`" placeholder="Category" required>
       </div>
     </form>
-    <Search :onSearch="handleSearch"/>
+    <Search :onAdd="handleAdd" :historicClues="clues" :onSearch="handleSearch"/>
 
   </div>
 
@@ -28,8 +28,7 @@ import { getData } from '../services/api';
 export default {
   data() {
     return {
-      clues: '',
-      items: '',
+      clues: null,
       keywords: ''
     };
   },
@@ -43,20 +42,20 @@ export default {
     },
     searchData() {
       getData(this.keywords)
-        .then(response => {
-          this.clues = response.map(() => {
-            return {
-              clue: response.clue,
-              answer: response.answer,
-              category: response.category
-            };
-          });
+        .then(clues => {
+          this.clues = clues;
+          return this.clues;
         });
-    }
-  
-  }
+    },
+    // handleAdd(clue) {
+    //   return addClue(clue)
+    //     .then(saved => {
 
+    //     });
+    // }
+  }
 };
+
 </script>
 
 <style scoped>
