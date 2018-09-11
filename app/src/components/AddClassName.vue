@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Add Class Name</h2>
-    <form>
+    <form @submit.prevent="handleSubmit">
       <label>
         Class Name: <input type="text"> 
       </label>
@@ -16,6 +16,8 @@ export default {
     handleNext() {
       this.$router.push('team-names');
     }
+  },
+  handleSubmit() {
   }
 };
 </script>
