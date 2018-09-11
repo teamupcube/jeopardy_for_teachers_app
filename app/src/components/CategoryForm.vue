@@ -44,7 +44,13 @@ export default {
     searchData() {
       getData(this.keywords)
         .then(response => {
-          this.clues = response.items.map(clue => clue.clue);
+          this.clues = response.map(() => {
+            return {
+              clue: response.clue,
+              answer: response.answer,
+              category: response.category
+            };
+          });
         });
     }
   
