@@ -64,8 +64,9 @@ export function checkForToken() {
   return user;
 }
 
-export function getData() {
-  return fetch(`${SEARCH_URL}`, {
+export function getData(keywords) {
+  return fetch(`${SEARCH_URL}/${keywords}`, {
+    
     headers: getHeaders()
   })
     .then(responseHandler);
