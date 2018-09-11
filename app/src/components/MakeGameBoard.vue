@@ -1,10 +1,10 @@
 <template>
   <div>
     <h2>Create your first Jeopardy category</h2>
-    <form>
+    <form @submit.prevent="handleAddCategory">
       <div>Game Name: 
         <input type="text" 
-          name="game-name" placeholder="Game Name" required>
+          name="board" placeholder="Game Name" required>
         <button>Submit</button>
       </div>
     </form>
@@ -18,6 +18,14 @@ import CategoryForm from './CategoryForm.vue';
 export default {
   components: {
     CategoryForm
+  },
+  methods: {
+    handleAddCategory(board) {
+      return addCategory(board)
+        .then(saved => {
+
+        });
+    }
   }
 };
 </script>

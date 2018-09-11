@@ -3,8 +3,10 @@
     <form class="category-form">
       <div>Catergory Name: 
         <input class="category-text" type="text" 
-          name="category-name" placeholder="Category" required>
+          name="categoryName" placeholder="Category" required>
       </div>
+    </form>
+    <form v-if="categoryName">
       <div>100 Point Clue: 
         <input class="category-text" type="text" 
           name="category-name" placeholder="Category" required>
@@ -15,7 +17,6 @@
       </div>
     </form>
     <Search :onAdd="handleAdd" :historicClues="clues" :onSearch="handleSearch"/>
-
   </div>
 
   
@@ -29,7 +30,8 @@ export default {
   data() {
     return {
       clues: null,
-      keywords: ''
+      keywords: '',
+      categoryName: ''
     };
   },
   components: {
@@ -47,12 +49,18 @@ export default {
           return this.clues;
         });
     },
-    // handleAdd(clue) {
-    //   return addClue(clue)
-    //     .then(saved => {
+    handleAdd(historicClue) {
+      return addHistoricClue(historicClue)
+        .then(saved => {
 
-    //     });
-    // }
+        });
+    },
+    handleAddCategory(categoryName) {
+      return addCategory(categoryName)
+        .then(saved => {
+
+        });
+    }
   }
 };
 

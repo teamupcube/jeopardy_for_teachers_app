@@ -89,3 +89,12 @@ export function getData(keywords) {
   })
     .then(responseHandler);
 }
+export function addHistoricCLue(historicClue) {
+  return
+}
+export function addCategory(categoryName) {
+  return fetch
+}
+export function addBoard(board) {
+  return fetch
+}
