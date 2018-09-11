@@ -6,9 +6,9 @@
       <div>Keywords
         <input
           type="text" 
-          name="searcg" 
+          name="keywords" 
           placeholder="Enter your keywords" 
-          v-model="search"
+          v-model="keywords"
           required>
       </div>
       <button>Search</button>
@@ -18,15 +18,17 @@
 
 <script>
 export default {
-
+  props: {
+    onSearch: Function
+  },
   data() {
     return {
-      search: ''
+      keywords: ''
     };
   },
   methods: {
     handleSubmit() {
-      this.onSearch(this.search);
+      this.onSearch(this.keywords);
     }
   }
 

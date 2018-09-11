@@ -1,7 +1,8 @@
 const URL = '/api';
 const AUTH_URL = `${URL}/auth`;
+const SEARCH_URL = `${URL}/search`;
 const GAMES_URL = `${URL}/games`;
-const BOARDS_URL = `${URL}/boards`
+const BOARDS_URL = `${URL}/boards`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -81,3 +82,10 @@ export function checkForToken() {
   return user;
 }
 
+export function getData(keywords) {
+  return fetch(`${SEARCH_URL}/${keywords}`, {
+    
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}

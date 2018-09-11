@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import CategoryForm from "./CategoryForm.vue";
+import CategoryForm from './CategoryForm.vue';
 export default {
   components: {
     CategoryForm
