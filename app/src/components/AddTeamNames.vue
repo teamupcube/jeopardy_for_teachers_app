@@ -2,6 +2,7 @@
   <div class="teams">
     <form @submit.prevent="handleSubmit">
       <div class="team-list">
+        <h2 v-if="game">Game Name: {{ game.class_name }} {{ game.id }}</h2>
         <div>
           <h2>Add Teams</h2>
           <label>
@@ -31,7 +32,8 @@ export default {
   },
   props: {
     team: Object,
-    onAddTeam: Function
+    onAddTeam: Function,
+    game: Object
   },
   // created() {
   //   const team = this.team;
@@ -43,8 +45,10 @@ export default {
     },
     handleSubmit() {
       const team = {
-        teamName: this.teamName
+        teamName: this.teamName,
+        gameId: this.game.id
       };
+      console.log('team', team);
       return this.onAddTeam(team);
       // console.log(teamName);
     }
