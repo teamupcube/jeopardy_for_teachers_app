@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Game Setup</h1>
-    <RouterView :onAdd="handleAddClassName" :onAddTeam="handleAddTeam"></RouterView>
+    <RouterView :onAdd="handleAddClassName" :game="game" :onAddTeam="handleAddTeam"></RouterView>
   </div>
 </template>
 
@@ -16,9 +16,17 @@ export default {
     AddClassName,
     AddTeamNames
   },
+  data() {
+    return {
+      game: null
+    }
+  },
   methods: {
     handleAddClassName(game) {
-      return addGame(game);
+      return addGame(game)
+        .then(results => {
+          this.game = results
+        })
     },
     handleAddTeam(team) {
       return addTeam(team);
