@@ -20,7 +20,7 @@
       <div>
         <h4>Results</h4>
         <p>Category: {{historicClue.category}}</p>
-        <p>Clue: {{historicClue.historicClue}}</p>
+        <p>Clue: {{historicClue.clue}}</p>
         <p>Answer: {{historicClue.answer}}</p>
         <p>Historic Point Value: {{historicClue.value}}</p>
         <form @submit.prevent="onAdd">
@@ -54,7 +54,7 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    handleSearch() {
       this.onSearch(this.keywords);
     }
   }

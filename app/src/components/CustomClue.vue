@@ -1,0 +1,68 @@
+<template>
+  <div>
+
+    <form @submit.prevent="handleSubmit" v-if="category">
+      <div>Clue: 
+        <input 
+        type="text" 
+        name="clue" 
+        placeholder="Clue"
+        value=100
+        v-model="clue" 
+        required>
+      </div>
+      <div>Answer: 
+        <input 
+        type="text" 
+        name="answer" 
+        placeholder="Answer"
+        v-model="answer" 
+        required>
+      <label>Select point value: 
+        <select 
+        name="value"
+        placeholder="Please choose a point value"
+        v-model="value"
+        required>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="300">300</option>
+        <option value="400">400</option>
+        <option value="500">500</option>
+      </select>
+      </label>
+      </div>
+      <button>Submit</button>
+    </form>
+  </div>
+
+</template>
+
+<script>
+
+export default {
+  props: {
+    category: String,
+    addCustomClue: Function
+  },
+
+  data() {
+    return {
+      clue: '',
+      answer: '',
+      value: null
+    };
+  },
+
+  methods: {
+    handleSubmit() {
+      this.addCustomClue(this.clue, this.answer, this.value);
+    }
+  }
+};
+
+</script>
+
+<style scoped>
+
+</style>
