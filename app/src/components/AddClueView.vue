@@ -1,8 +1,16 @@
 <template>
   <div id="app">
-      <router-link to="/board/:id/categories/:categoryId/custom-clue" v-if="user"></router-link>
-      <router-link to="/board/:id/categories/:categoryId/search"></router-link>
-    <RouterView addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
+      <router-link :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</router-link><br/>
+      <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link>
+      <div v-if="previousClue">
+        <p>Your previous clue, answer, and point value were saved as:</p>
+        <ul>
+          <li>Clue: {{ previousClue.clue }}</li>
+          <li>Answer: {{ previousClue.answer }}</li>
+          <li>Value: {{ previousClue.value }}</li>
+        </ul>
+      </div>
+    <RouterView :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
   </div>
 </template>
 
@@ -19,7 +27,8 @@ export default {
     };
   },
   created() {
-    this.category = this.$route.params.id;
+    this.category = this.$route.params.categoryId;
+    this.board = this.$route.params.id;
   },
   methods: {
     handleSearch(keywords) {
@@ -33,12 +42,12 @@ export default {
           return this.clues;
         });
     },
-    handleCustomClue() {
-      console.log('make category route', this.$route.params.boardId);
+    handleCustomClue(clue, answer, value) {
       this.clueNumber++;
       this.board = this.$route.params.boardId;
       this.category = this.$route.params.categoryId;
-      return addClue(this.clue, this.answer, this.value, this.category)
+      console.log('make category route', this.category);
+      return addClue(clue, answer, value, this.category)
         .then(saved => {
           this.previousClue = saved;
           this.clue = '';

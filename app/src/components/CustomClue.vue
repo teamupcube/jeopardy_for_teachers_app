@@ -1,15 +1,7 @@
 <template>
   <div>
-    <div v-if="previousClue">
-      <p>Your previous clue, answer, and point value were saved as:</p>
-      <ul>
-        <li>Clue: {{ previousClue.clue }}</li>
-        <li>Answer: {{ previousClue.answer }}</li>
-        <li>Value: {{ previousClue.value }}</li>
-      </ul>
-    </div>
 
-    <form @submit.prevent="handleCustomClue" v-if="category">
+    <form @submit.prevent="handleSubmit" v-if="category">
       <div>Clue: 
         <input 
         type="text" 
@@ -43,19 +35,29 @@
       <button>Submit</button>
     </form>
   </div>
+
 </template>
 
 <script>
 
 export default {
+  props: {
+    category: String,
+    addCustomClue: Function
+  },
+
   data() {
     return {
-      clue: null,
+      clue: '',
+      answer: '',
+      value: null
     };
   },
 
   methods: {
-    
+    handleSubmit() {
+      this.addCustomClue(this.clue, this.answer, this.value);
+    }
   }
 };
 
