@@ -1,15 +1,24 @@
 <template>
   <div>
 
-    <form v-if="category">
+    <form @submit.prevent="handleSubmitClues" v-if="category">
       <div>100 Point Clue: 
-        <input class="category-text" type="text" 
-          name="category-name" placeholder="Category" required>
+        <input 
+        type="text" 
+        name="clue100" 
+        placeholder="Clue"
+        v-model="clue100" 
+        required>
       </div>
       <div>100 Point Answer: 
-        <input class="category-text" type="text" 
-          :name="`category-name`" placeholder="Category" required>
+        <input 
+        type="text" 
+        name="answer100" 
+        placeholder="Answer"
+        v-model="answer100" 
+        required>
       </div>
+      <button>Submit</button>
     </form>
     <Search :onAdd="handleAdd" :historicClues="clues" :onSearch="handleSearch"/>
   </div>
@@ -46,12 +55,22 @@ export default {
           return this.clues;
         });
     },
+    handleSubmitClues() {
+      // console.log('make category route', this.$route.params.id);
+      // this.board = this.$route.params.id;
+      // return addCategory(this.category, this.board)
+      //   .then(saved => {
+      //     console.log('saved', saved);
+      //     this.category = saved;
+      //     this.$router.push(`/make-game/${this.category.boardId}/categories/${this.category.id}`);
+      //   });
+    },
     handleAdd(historicClue) {
       return addHistoricClue(historicClue)
         .then(saved => {
 
         });
-    },
+    }
     
   }
 };
@@ -59,15 +78,5 @@ export default {
 </script>
 
 <style scoped>
-
-  .category-form {
-    font-family: sans-serif;
-  }
-
-  .category-text {
-    width: 200px;
-    height: 30px;
-    font-size: .9em;
-  }
 
 </style>
