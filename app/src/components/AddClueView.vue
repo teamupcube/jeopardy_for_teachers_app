@@ -29,6 +29,7 @@ export default {
   created() {
     this.category = this.$route.params.categoryId;
     this.board = this.$route.params.id;
+    console.log('board', this.board);
   },
   methods: {
     handleSearch(keywords) {
@@ -42,10 +43,9 @@ export default {
           return this.clues;
         });
     },
-    handleCustomClue(clue, answer, value, search) {
+    handleCustomClue(clue, answer, value, view) {
       this.clueNumber++;
-      this.board = this.$route.params.boardId;
-      this.category = this.$route.params.categoryId;
+      console.log('clueNumber', this.clueNumber);
       console.log('make category route', this.category);
       return addClue(clue, answer, value, this.category)
         .then(saved => {
@@ -54,8 +54,11 @@ export default {
           this.answer = '';
           this.value = null;
           console.log('prev clue', this.previousClue);
-          if(this.clueNumber < 6) {
-            this.$router.push(`/board/${this.board}/categories/${this.category}/${search}`);
+          if(this.clueNumber < 5) {
+            this.$router.push(`/board/${this.board}/categories/${this.category}/${view}`);
+          } 
+          else {
+            this.$router.push(`/board/${this.board}`);
           }
         });
     },
