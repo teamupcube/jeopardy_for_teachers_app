@@ -3,6 +3,7 @@ const AUTH_URL = `${URL}/auth`;
 const SEARCH_URL = `${URL}/search`;
 const GAMES_URL = `${URL}/games`;
 const BOARDS_URL = `${URL}/me/boards`;
+const CATEGORIES_URL = `${URL}/me/categories`;
 const TEAMS_URL = `${URL}/teams`;
 
 function responseHandler(response) {
@@ -46,10 +47,10 @@ export function addTeam(team) {
 }
 
 export function getGame() {
-  return fetch(GAME_URL, {
+  return fetch(GAMES_URL, {
     headers: getHeaders(),
   })
-    .then(responseHandle);
+    .then(responseHandler);
 }
 
 export function signUp(credentials) {
@@ -106,12 +107,19 @@ export function getData(keywords) {
   })
     .then(responseHandler);
 }
-export function addHistoricCLue(historicClue) {
-  return;
+// export function addHistoricCLue(historicClue) {
+//   return;
+// }
+
+export function addCategory(category) {
+  console.log('api category', category);
+  return fetch(`${CATEGORIES_URL}/${category}`, {
+    method: 'POST',
+    headers: getHeaders(),
+  })
+    .then(responseHandler);
 }
-export function addCategory(categoryName) {
-  return fetch;
-}
+
 export function addBoard(board) {
   console.log('api board', board);
   return fetch(`${BOARDS_URL}/${board}`, {

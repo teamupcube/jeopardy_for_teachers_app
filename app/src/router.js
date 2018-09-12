@@ -8,7 +8,7 @@ import AddClassName from './components/AddClassName';
 import AddTeamNames from './components/AddTeamNames';
 import Instructions from './components/Instructions';
 import MakeCategory from './components/MakeCategory';
-import Search from './components/Search';
+// import Search from './components/Search';
 
 
 export default new VueRouter({

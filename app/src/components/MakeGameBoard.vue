@@ -20,7 +20,6 @@ import { addBoard } from '../services/api';
 export default {
   data() {
     return {
-      boards: null,
       board: ''
     };
   },
