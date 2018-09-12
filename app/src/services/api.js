@@ -4,7 +4,7 @@ const SEARCH_URL = `${URL}/search`;
 const GAMES_URL = `${URL}/games`;
 const BOARDS_URL = `${URL}/me/boards`;
 const TEAMS_URL = `${URL}/teams`;
-const RESULTS_URL = `${URL}/results`
+const RESULTS_URL = `${URL}/results`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
