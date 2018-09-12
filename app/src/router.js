@@ -9,6 +9,7 @@ import AddTeamNames from './components/AddTeamNames';
 import CategoryName from './components/CategoryName';
 import Search from './components/Search';
 import CustomClue from './components/CustomClue';
+import Results from './components/Results';
 
 
 export default new VueRouter({
@@ -28,7 +29,8 @@ export default new VueRouter({
         { path: 'search', component: Search },
       ]
     },
-      { path: '*', redirect: '/' }
+    { path: '/results', component: Results },
+    { path: '*', redirect: '/' }
   ]
 });
 
