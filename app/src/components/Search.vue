@@ -19,23 +19,18 @@
       :key="historicClue.id">
       <div>
         <h4>Results</h4>
-        <p>Category: {{historicClue.category}}</p>
-        <p>Clue: {{historicClue.clue}}</p>
-        <p>Answer: {{historicClue.answer}}</p>
-        <p>Historic Point Value: {{historicClue.value}}</p>
-        <form @submit.prevent="onAdd">
-          <label><input type="checkbox" name="selected" value=true>Use this clue</label><br/>
+        <p>Clue: {{ historicClue.clue }}</p>
+        <p>Answer: {{ historicClue.answer }}</p>
           <label>Select point value
-            <select name="value">
-            <option value="100">100</option>
-            <option value="200">200</option>
-            <option value="300">300</option>
-            <option value="400">400</option>
-            <option value="500">500</option>
+            <select name="value" v-model="value">
+            <option :value="100" >100</option>
+            <option :value="200">200</option>
+            <option :value="300">300</option>
+            <option :value="400">400</option>
+            <option :value="500">500</option>
           </select>
           </label>
-          <button>Add to game board</button>
-        </form>
+          <button @click="handleAdd" :value="historicClue.id">Add this clue to your board</button>
       </div>
     </div>
   </div>
@@ -46,17 +41,32 @@ export default {
   props: {
     onSearch: Function,
     historicClues: Array,
-    onAdd: Function
+    onAdd: Function,
   },
   data() {
     return {
-      keywords: ''
+      keywords: '',
+      selected: null,
+      clue: null,
+      value: null
     };
   },
   methods: {
     handleSubmit() {
       this.onSearch(this.keywords);
+    },
+    handleAdd(event) {
+      let clues = this.historicClues;
+      for(let i = 0; i < clues.length; i++) {
+        if(clues[i].id === parseInt(event.target.value)) {
+          this.clue = clues[i].clue;
+          this.answer = clues[i].answer;
+        }
+      }
+      console.log('clue', this.clue, this.answer, this.value);
+      this.onAdd(this.clue, this.answer, this.value);
     }
+
   }
 
 };

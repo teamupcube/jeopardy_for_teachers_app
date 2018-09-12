@@ -10,7 +10,7 @@
           <li>Value: {{ previousClue.value }}</li>
         </ul>
       </div>
-    <RouterView :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
+    <RouterView :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
   </div>
 </template>
 
@@ -58,6 +58,10 @@ export default {
             this.$router.push(`/board/${this.board}/categories/${this.category}`);
           }
         });
+    },
+    handleAdd(clue, answer, value) {
+      console.log('view', clue, answer, value);
+      
     }
   }
 };
