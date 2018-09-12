@@ -4,6 +4,7 @@ const SEARCH_URL = `${URL}/search`;
 const GAMES_URL = `${URL}/games`;
 const BOARDS_URL = `${URL}/me/boards`;
 const TEAMS_URL = `${URL}/teams`;
+const RESULTS_URL = `${URL}/results`
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -18,6 +19,13 @@ function getHeaders() {
   const headers = { 'Content-type': 'application/json' };
   if(token) headers['Authorization'] = token;
   return headers;
+}
+
+export function getGames() {
+  return fetch ('api/games-played', {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
 }
 
 export function getBoards() {
@@ -50,6 +58,13 @@ export function addTeamGame(teamId, gameId) {
   })
     .then(responseHandler);
 }
+
+export function getResults(gameId) {
+  return fetch (`RESULTS_URL/${gameId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+} 
 
 export function signUp(credentials) {
   return fetch(`${AUTH_URL}/signup`, {
