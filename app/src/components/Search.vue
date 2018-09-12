@@ -54,7 +54,7 @@ export default {
     };
   },
   methods: {
-    handleSearch() {
+    handleSubmit() {
       this.onSearch(this.keywords);
     }
   }
