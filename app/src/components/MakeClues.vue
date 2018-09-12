@@ -57,7 +57,8 @@ export default {
     return {
       clue: null,
       keywords: '',
-      clueNumber: 0
+      clueNumber: null,
+      previousClue: null
     };
   },
   created() {
@@ -85,14 +86,17 @@ export default {
       this.category = this.$route.params.categoryId;
       return addClue(this.clue, this.answer, this.value, this.category)
         .then(saved => {
-          console.log('saved', saved);
           this.previousClue = saved;
+          this.clue = '';
+          this.answer = '';
+          this.value = null;
+          console.log('prev clue', this.previousClue);
           if(this.clueNumber < 6) {
             this.$router.push(`/make-game/${this.board}/categories/${this.category}`);
           }
         });
 
-    },
+    }
     // handleAdd(historicClue) {
     //   return addHistoricClue(historicClue)
     //     .then(saved => {

@@ -127,3 +127,12 @@ export function addBoard(board) {
   })
     .then(responseHandler);
 }
+
+export function addClue(clue, answer, value, category) {
+  console.log('api category', category, 'api clue', clue);
+  return fetch(`${URL}/me/categories/${category}/clues/${clue}/${answer}/${value}`, {
+    method: 'POST',
+    headers: getHeaders(),
+  })
+    .then(responseHandler);
+}
