@@ -43,7 +43,7 @@ export default {
       return addTeam(this.teamName)
         .then(saved => {
           this.team = saved;
-          addTeamGame(this.team.teamId,this.gameId)
+          addTeamGame(this.team.teamId, this.gameId);
         });
     }
   },
