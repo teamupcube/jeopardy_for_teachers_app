@@ -1,11 +1,6 @@
 <template>
   <div>
-    <form class="category-form">
-      <div>Catergory Name: 
-        <input class="category-text" type="text" 
-          name="categoryName" placeholder="Category" required>
-      </div>
-    </form>
+
     <form v-if="categoryName">
       <div>100 Point Clue: 
         <input class="category-text" type="text" 
@@ -31,7 +26,6 @@ export default {
     return {
       clues: null,
       keywords: '',
-      categoryName: ''
     };
   },
   components: {
@@ -55,12 +49,7 @@ export default {
 
         });
     },
-    handleAddCategory(categoryName) {
-      return addCategory(categoryName)
-        .then(saved => {
-
-        });
-    }
+    
   }
 };
 

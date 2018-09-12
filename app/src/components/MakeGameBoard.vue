@@ -12,13 +12,10 @@
         <button>Submit</button>
       </div>
     </form>
-    <router-link to="/form">Add Category</router-link>
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import CategoryForm from './CategoryForm.vue';
 import { addBoard } from '../services/api';
 export default {
   data() {
@@ -27,15 +24,13 @@ export default {
       board: ''
     };
   },
-  components: {
-    CategoryForm
-  },
   methods: {
     handleAddBoard() {
       console.log('board', this.board);
       return addBoard(this.board)
         .then(saved => {
           this.board = saved;
+          this.$router.push(`/make-game/:id`)
         });
     }
   }
