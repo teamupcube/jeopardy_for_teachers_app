@@ -1,22 +1,44 @@
 <template>
   <div>
+    <div v-if="previousClue">
+      <p>Your previous clue, answer, and point value were saved as:</p>
+      <ul>
+        <li>Clue: {{ previousClue.clue }}</li>
+        <li>Answer: {{ previousClue.answer }}</li>
+        <li>Value: {{ previousClue.value }}</li>
+      </ul>
+    </div>
 
     <form @submit.prevent="handleSubmitClues" v-if="category">
-      <div>100 Point Clue: 
+      <div>Clue: 
         <input 
         type="text" 
-        name="clue100" 
+        name="clue" 
         placeholder="Clue"
-        v-model="clue100" 
+        value=100
+        v-model="clue" 
         required>
       </div>
-      <div>100 Point Answer: 
+      <div>Answer: 
         <input 
         type="text" 
-        name="answer100" 
+        name="answer" 
         placeholder="Answer"
-        v-model="answer100" 
+        v-model="answer" 
         required>
+      <label>Select point value: 
+        <select 
+        name="value"
+        placeholder="Please choose a point value"
+        v-model="value"
+        required>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="300">300</option>
+        <option value="400">400</option>
+        <option value="500">500</option>
+      </select>
+      </label>
       </div>
       <button>Submit</button>
     </form>
@@ -28,13 +50,14 @@
 
 <script>
 import Search from './Search.vue';
-import { getData } from '../services/api';
+import { getData, addClue } from '../services/api';
 
 export default {
   data() {
     return {
-      clues: null,
+      clue: null,
       keywords: '',
+      clueNumber: 0
     };
   },
   created() {
@@ -56,21 +79,26 @@ export default {
         });
     },
     handleSubmitClues() {
-      // console.log('make category route', this.$route.params.id);
-      // this.board = this.$route.params.id;
-      // return addCategory(this.category, this.board)
-      //   .then(saved => {
-      //     console.log('saved', saved);
-      //     this.category = saved;
-      //     this.$router.push(`/make-game/${this.category.boardId}/categories/${this.category.id}`);
-      //   });
-    },
-    handleAdd(historicClue) {
-      return addHistoricClue(historicClue)
+      console.log('make category route', this.$route.params.boardId);
+      this.clueNumber++;
+      this.board = this.$route.params.boardId;
+      this.category = this.$route.params.categoryId;
+      return addClue(this.clue, this.answer, this.value, this.category)
         .then(saved => {
-
+          console.log('saved', saved);
+          this.previousClue = saved;
+          if(this.clueNumber < 6) {
+            this.$router.push(`/make-game/${this.board}/categories/${this.category}`);
+          }
         });
-    }
+
+    },
+    // handleAdd(historicClue) {
+    //   return addHistoricClue(historicClue)
+    //     .then(saved => {
+
+    //     });
+    // }
     
   }
 };

@@ -44,7 +44,7 @@ export default {
     getGame()
       .then(games => {
         this.game = game
-      })
+      });
   }
 };
 </script>
