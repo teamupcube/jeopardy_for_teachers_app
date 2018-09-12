@@ -1,22 +1,24 @@
 <template>
   <div>
     <h1>Game Setup</h1>
-    <RouterView :onAdd="handleAddClassName" :game="game" :onAddTeam="handleAddTeam"></RouterView>
+    <!-- <RouterView :onAdd="handleAddClassName" :game="game" :onAddTeam="handleAddTeam"></RouterView> -->
+    <RouterView></RouterView>
+
   </div>
 </template>
 
 <script>
 
-import AddClassName from './AddClassName';
-import AddTeamNames from './AddTeamNames';
-import { addGame, addTeam, getGame } from '../services/api';
+// import AddClassName from './AddClassName';
+// import AddTeamNames from './AddTeamNames';
+// import { addGame, addTeam, getGame } from '../services/api';
 
 
 export default {
-  components: {
-    AddClassName,
-    AddTeamNames
-  },
+  // components: {
+  //   AddClassName,
+  //   AddTeamNames
+  // },
   data() {
     return {
       game: null

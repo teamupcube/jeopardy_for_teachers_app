@@ -11,12 +11,6 @@
         </div>
       </div>
     </form>
-        <div>
-          <h2>Your Teams</h2>
-          <ul> 
-            <li>LISTTTT</li>
-          </ul>
-        </div>
       <button @click="handleNext">Done</button>
   </div>
 </template>
