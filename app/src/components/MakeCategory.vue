@@ -1,8 +1,12 @@
 <template>
   <form @submit.prevent="handleAddCategory" class="category-form">
     <div>Catergory Name: 
-      <input class="category-text" type="text" 
-        name="categoryName" placeholder="Category" required>
+      <input 
+        type="text" 
+        name="category" 
+        placeholder="Category" 
+        v-model="category" 
+        required/>
     </div>
     <button>Submit</button>
   </form>
@@ -14,16 +18,18 @@ import { addCategory } from '../services/api';
 export default {
   data() {
     return {
-      categoryName: ''
+      category: ''
     };
   },
   methods: {
     handleAddCategory() {
-      console.log('category', this.category);
-      return addCategory(this.category)
+      console.log('make category route', this.$route.params.id);
+      this.board = this.$route.params.id;
+      return addCategory(this.category, this.board)
         .then(saved => {
+          console.log('saved', saved);
           this.category = saved;
-          this.$route.push(`/make-game/:id/categories/:categoryId`);
+          this.$router.push(`/make-game/${this.category.boardId}/categories/${this.category.id}`);
         });
     }
   }
