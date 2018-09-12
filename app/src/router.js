@@ -28,7 +28,7 @@ export default new VueRouter({
         { path: 'search', component: Search },
       ]
     },
-    { path: '*', redirect: '/' }
+      { path: '*', redirect: '/' }
   ]
 });
 

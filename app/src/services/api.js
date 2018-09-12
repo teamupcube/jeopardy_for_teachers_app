@@ -20,6 +20,13 @@ function getHeaders() {
   return headers;
 }
 
+export function getGames() {
+  return fetch ('api/games-played', {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
 export function getBoards() {
   return fetch (BOARDS_URL, {
     headers: getHeaders()
