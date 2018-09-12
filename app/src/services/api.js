@@ -45,6 +45,13 @@ export function addTeam(team) {
     .then(responseHandler);
 }
 
+export function getGame() {
+  return fetch(GAME_URL, {
+    headers: getHeaders(),
+  })
+    .then(responseHandle);
+}
+
 export function signUp(credentials) {
   return fetch(`${AUTH_URL}/signup`, {
     method: 'POST',

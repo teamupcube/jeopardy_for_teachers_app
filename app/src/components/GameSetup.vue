@@ -9,7 +9,7 @@
 
 import AddClassName from './AddClassName';
 import AddTeamNames from './AddTeamNames';
-import { addGame, addTeam } from '../services/api';
+import { addGame, addTeam, getGame } from '../services/api';
 
 // const initGame = () => {
 //   return {
@@ -39,6 +39,12 @@ export default {
     handleAddTeam(team) {
       return addTeam(team);
     }
+  },
+  created() {
+    getGame()
+      .then(games => {
+        this.game = game
+      })
   }
 };
 </script>

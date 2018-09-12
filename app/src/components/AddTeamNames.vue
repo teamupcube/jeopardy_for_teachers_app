@@ -48,9 +48,7 @@ export default {
         teamName: this.teamName,
         gameId: this.game.id
       };
-      console.log('team', team);
       return this.onAddTeam(team);
-      // console.log(teamName);
     }
   },
 
