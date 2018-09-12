@@ -3,7 +3,7 @@
     <header>
       <RouterLink v-if="!user" to="/auth">Sign in</RouterLink>
       <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
-      <router-link to="new" v-if="user"></router-link>
+      <router-link to="/make-game" v-if="user"></router-link>
       <router-link v-if="user" to="/"></router-link>
       <span v-if="user">user: {{ user.name }}</span> 
 

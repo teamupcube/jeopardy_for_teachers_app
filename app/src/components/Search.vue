@@ -23,7 +23,7 @@
         <p>Clue: {{historicClue.historicClue}}</p>
         <p>Answer: {{historicClue.answer}}</p>
         <p>Historic Point Value: {{historicClue.value}}</p>
-        <form @submit.prevent="handleAdd">
+        <form @submit.prevent="onAdd">
           <label><input type="checkbox" name="selected" value=true>Use this clue</label><br/>
           <label>Select point value
             <select name="value">
