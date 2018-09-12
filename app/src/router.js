@@ -10,6 +10,7 @@ import CategoryName from './components/CategoryName';
 import Search from './components/Search';
 import CustomClue from './components/CustomClue';
 import Results from './components/Results';
+import GamePlay from './components/GamePlay';
 
 
 export default new VueRouter({
@@ -21,6 +22,7 @@ export default new VueRouter({
     { path: '/board/:id', component: CategoryName },
     { path: '/game', component: AddClassName },
     { path: '/game/:id', component: AddTeamNames },
+    { path: '/gameplay', component: GamePlay },
     { 
       path: '/board/:id/categories/:categoryId', 
       component: AddClueView,
