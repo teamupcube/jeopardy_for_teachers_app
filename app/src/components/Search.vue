@@ -48,7 +48,8 @@ export default {
       keywords: '',
       selected: null,
       clue: null,
-      value: null
+      value: null,
+      search: null
     };
   },
   methods: {
@@ -57,6 +58,7 @@ export default {
     },
     handleAdd(event) {
       let clues = this.historicClues;
+      this.view = 'search';
       for(let i = 0; i < clues.length; i++) {
         if(clues[i].id === parseInt(event.target.value)) {
           this.clue = clues[i].clue;
@@ -64,7 +66,7 @@ export default {
         }
       }
       console.log('clue', this.clue, this.answer, this.value);
-      this.onAdd(this.clue, this.answer, this.value);
+      this.onAdd(this.clue, this.answer, this.value, this.view);
     }
 
   }

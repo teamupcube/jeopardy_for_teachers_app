@@ -42,7 +42,7 @@ export default {
           return this.clues;
         });
     },
-    handleCustomClue(clue, answer, value) {
+    handleCustomClue(clue, answer, value, search) {
       this.clueNumber++;
       this.board = this.$route.params.boardId;
       this.category = this.$route.params.categoryId;
@@ -55,7 +55,7 @@ export default {
           this.value = null;
           console.log('prev clue', this.previousClue);
           if(this.clueNumber < 6) {
-            this.$router.push(`/board/${this.board}/categories/${this.category}`);
+            this.$router.push(`/board/${this.board}/categories/${this.category}/${search}`);
           }
         });
     },
