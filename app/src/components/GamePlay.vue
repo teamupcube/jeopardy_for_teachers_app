@@ -4,58 +4,57 @@
   <h1>heyyyy</h1>
     <div class="container">
       <div class="column" id="cat_one">
-        <div class="box"> <button id="show-modal" @click="showModal = true">Show Modal</button>
-        <Modal v-if="showModal" @close="showModal = false">
-        <h3 slot="header">custom header</h3>
-        </Modal>
-        Cat 1</div>
-        <div class="box">100</div>
-        <div class="box">200</div>
-        <div class="box">300</div>
-        <div class="box">400</div>
-        <div class="box">500</div>
+        <div class="box">Cat 1</div>
+        <button class="box" id="show-modal" @click="showModal = true"  >100</button>
+        <button class="box" id="show-modal" @click="showModal = true" >200</button>
+        <button class="box" id="show-modal" @click="showModal = true" >300</button>
+        <button class="box" id="show-modal" @click="showModal = true" >400</button>
+        <button class="box" id="show-modal" @click="showModal = true" >500</button>
       </div>
       <div class="column" id="cat_two">
-        <div class="box">Cat 2</div>
-        <div class="box">100</div>
-        <div class="box">200</div>
-        <div class="box">300</div>
-        <div class="box">400</div>
-        <div class="box">500</div>
+        <div class="box" >Cat 2</div>
+        <button class="box" id="show-modal" @click="showModal = true" >100</button>
+        <button class="box" id="show-modal" @click="showModal = true" >200</button>
+        <button class="box" id="show-modal" @click="showModal = true" >300</button>
+        <button class="box" id="show-modal" @click="showModal = true" >400</button>
+        <button class="box" id="show-modal" @click="showModal = true" >500</button>
       </div>
       <div class="column" id="cat_three">
-        <div class="box">Cat 3</div>
-        <div class="box">100</div>
-        <div class="box">200</div>
-        <div class="box">300</div>
-        <div class="box">400</div>
-        <div class="box">500</div>
+        <div class="box" >Cat 3</div>
+        <button class="box" id="show-modal" @click="showModal = true" >100</button>
+        <button class="box" id="show-modal" @click="showModal = true" >200</button>
+        <button class="box" id="show-modal" @click="showModal = true" >300</button>
+        <button class="box" id="show-modal" @click="showModal = true" >400</button>
+        <button class="box" id="show-modal" @click="showModal = true" >500</button>
       </div>
       <div class="column" id="cat_four">
-        <div class="box">Cat 4</div>
-        <div class="box">100</div>
-        <div class="box">200</div>
-        <div class="box">300</div>
-        <div class="box">400</div>
-        <div class="box">500</div>
+        <div class="box" >Cat 4</div>
+        <button class="box" id="show-modal" @click="showModal = true" >100</button>
+        <button class="box" id="show-modal" @click="showModal = true" >200</button>
+        <button class="box" id="show-modal" @click="showModal = true" >300</button>
+        <button class="box" id="show-modal" @click="showModal = true" >400</button>
+        <button class="box" id="show-modal" @click="showModal = true" >500</button>
       </div>
       <div class="column" id="cat_five">
-        <div class="box">Cat 5</div>
-        <div class="box">100</div>
-        <div class="box">200</div>
-        <div class="box">300</div>
-        <div class="box">400</div>
-        <div class="box">500</div>
+        <div class="box" >Cat 5</div>
+        <button class="box" id="show-modal" @click="showModal = true" >100</button>
+        <button class="box" id="show-modal" @click="showModal = true" >200</button>
+        <button class="box" id="show-modal" @click="showModal = true" >300</button>
+        <button class="box" id="show-modal" @click="showModal = true" >400</button>
+        <button class="box" id="show-modal" @click="showModal = true" >500</button>
       </div>
       <div class="column" id="cat_six">
-        <div class="box">Cat 6</div>
-        <div class="box">100</div>
-        <div class="box">200</div>
-        <div class="box">300</div>
-        <div class="box">400</div>
-        <div class="box">500</div>
+        <div class="box" >Cat 6</div>
+        <button class="box" id="show-modal" @click="showModal = true" >100</button>
+        <button class="box" id="show-modal" @click="showModal = true" >200</button>
+        <button class="box" id="show-modal" @click="showModal = true" >300</button>
+        <button class="box" id="show-modal" @click="showModal = true" >400</button>
+        <button class="box" id="show-modal" @click="showModal = true" >500</button>
       </div>
     </div>
+    <Modal v-if="showModal" @close="showModal = false">
+    <h3 slot="header">custom header</h3>
+    </Modal>
   </main>
 </template>
 
@@ -70,7 +69,7 @@ export default {
     return {
       showModal: false
 
-    }
+    };
   }
 
 };
