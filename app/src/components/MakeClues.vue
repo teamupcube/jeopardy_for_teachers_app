@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <form v-if="categoryName">
+    <form v-if="category">
       <div>100 Point Clue: 
         <input class="category-text" type="text" 
           name="category-name" placeholder="Category" required>
@@ -27,6 +27,9 @@ export default {
       clues: null,
       keywords: '',
     };
+  },
+  created() {
+    this.category = this.$route.params.id;
   },
   components: {
     Search
