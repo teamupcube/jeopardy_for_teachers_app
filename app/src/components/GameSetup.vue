@@ -11,12 +11,7 @@ import AddClassName from './AddClassName';
 import AddTeamNames from './AddTeamNames';
 import { addGame, addTeam, getGame } from '../services/api';
 
-// const initGame = () => {
-//   return {
-//     className: this.game.class_name ? this.game.class_name : '',
-//     id: ''
-//   };
-// };
+
 export default {
   components: {
     AddClassName,
@@ -25,7 +20,6 @@ export default {
   data() {
     return {
       game: null
-      // game: this.game ? Object.assign({}, this.game) : initGame()
     };
   },
   methods: {

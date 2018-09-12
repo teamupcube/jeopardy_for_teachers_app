@@ -2,7 +2,6 @@
   <div class="teams">
     <form @submit.prevent="handleSubmit">
       <div class="team-list">
-        <h2 v-if="game">Game Name: {{ game.class_name }} {{ game.id }}</h2>
         <div>
           <h2>Add Teams</h2>
           <label>
@@ -24,6 +23,8 @@
 
 <script>
 
+import { addTeam } from '../services/api';
+
 export default {
   data() {
     return {
@@ -31,9 +32,9 @@ export default {
     };
   },
   props: {
-    team: Object,
-    onAddTeam: Function,
-    game: Object
+    // team: Object,
+    // onAddTeam: Function,
+    // game: Object
   },
   // created() {
   //   const team = this.team;
@@ -44,11 +45,12 @@ export default {
       this.$router.push('instructions');
     },
     handleSubmit() {
-      const team = {
-        teamName: this.teamName,
-        gameId: this.game.id
-      };
-      return this.onAddTeam(team);
+      this.gameId = this.$route.params.id;
+      return addTeam(this.teamName, this.gameId)
+        .then(saved => {
+          this.team = saved;
+          // this.$router.push(`/make-game/${this.category.boardId}/categories/${this.category.id}`);
+        });
     }
   },
 

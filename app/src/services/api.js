@@ -28,10 +28,9 @@ export function getBoards() {
 }
 
 export function addGame(game) {
-  return fetch(GAMES_URL, {
+  return fetch(`${GAMES_URL}/${game.className}/${game.boardId}`, {
     method: 'POST',
     headers: getHeaders(),
-    body: JSON.stringify(game)
   })
     .then(responseHandler);
 }

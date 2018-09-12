@@ -19,16 +19,17 @@ export default new VueRouter({
     { path: '/make-game', component: MakeGameBoard },
     { path: '/make-game/:id', component: MakeCategory },
     { path: '/make-game/:id/categories/:categoryId', component: MakeClues },
-    { 
-      path: '/play', 
-      component: GameSetup, 
-      children: [
-        { path: 'class-name', component: AddClassName },
-        { path: 'team-names', component: AddTeamNames },
-        { path: 'instructions', component: Instructions },
-        { path: '', redirect: 'class-name' }
-      ]
-    },
+    { path: '/game', component: AddClassName },
+    { path: '/game/:id', component: AddTeamNames },
     { path: '*', redirect: '/' }
   ]
 });
+
+
+
+// children: [
+//   { path: 'class-name', component: AddClassName },
+//   { path: 'team-names', component: AddTeamNames },
+//   { path: 'instructions', component: Instructions },
+//   { path: '', redirect: 'class-name' }
+// ]
