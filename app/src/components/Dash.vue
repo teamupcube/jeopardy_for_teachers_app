@@ -2,7 +2,7 @@
   <div v-if="user">
     <h1>Dashboard</h1>
     <br>
-    <router-link to="/play">Play Game</router-link>
+    <router-link to="/game">Play Game</router-link>
     <router-link to="/board">Make New Game Board</router-link>
     <RouterView></RouterView>
   </div>
