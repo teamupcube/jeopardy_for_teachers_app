@@ -93,7 +93,7 @@ export default {
           this.value = null;
           console.log('prev clue', this.previousClue);
           if(this.clueNumber < 6) {
-            this.$router.push(`/make-game/${this.board}/categories/${this.category}`);
+            this.$router.push(`/board/${this.board}/categories/${this.category}`);
           }
         });
 

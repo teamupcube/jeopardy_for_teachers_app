@@ -29,7 +29,7 @@ export default {
         .then(saved => {
           console.log('saved', saved);
           this.category = saved;
-          this.$router.push(`/make-game/${this.category.boardId}/categories/${this.category.id}`);
+          this.$router.push(`/board/${this.category.boardId}/categories/${this.category.id}`);
         });
     }
   }

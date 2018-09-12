@@ -16,9 +16,9 @@ export default new VueRouter({
   routes: [
     { path: '/', component: Dash },
     { path: '/auth', component: Auth },
-    { path: '/make-game', component: MakeGameBoard },
-    { path: '/make-game/:id', component: MakeCategory },
-    { path: '/make-game/:id/categories/:categoryId', component: MakeClues },
+    { path: '/board', component: MakeGameBoard },
+    { path: '/board/:id', component: MakeCategory },
+    { path: '/board/:id/categories/:categoryId', component: MakeClues },
     { 
       path: '/play', 
       component: GameSetup, 
