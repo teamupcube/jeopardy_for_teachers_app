@@ -55,6 +55,7 @@ import { getData, addClue } from '../services/api';
 export default {
   data() {
     return {
+      clues: null,
       clue: null,
       keywords: '',
       clueNumber: null,
