@@ -1,9 +1,14 @@
+
 <template>
   <main>
   <h1>heyyyy</h1>
     <div class="container">
       <div class="column" id="cat_one">
-        <div class="box">Cat 1</div>
+        <div class="box"> <button id="show-modal" @click="showModal = true">Show Modal</button>
+        <Modal v-if="showModal" @close="showModal = false">
+        <h3 slot="header">custom header</h3>
+        </Modal>
+        Cat 1</div>
         <div class="box">100</div>
         <div class="box">200</div>
         <div class="box">300</div>
@@ -55,7 +60,18 @@
 </template>
 
 <script>
+import Modal from './Modal';
+
 export default {
+  components: {
+    Modal
+  },
+  data() {
+    return {
+      showModal: false
+
+    }
+  }
 
 };
 </script>
