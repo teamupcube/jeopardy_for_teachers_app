@@ -3,7 +3,6 @@ import BoardName from './components/BoardName';
 import Dash from './components/Dash';
 import AddClueView from './components/AddClueView';
 import Auth from './components/Auth';
-import GameSetup from './components/GameSetup';
 import AddClassName from './components/AddClassName';
 import AddTeamNames from './components/AddTeamNames';
 import Instructions from './components/Instructions';
@@ -27,16 +26,17 @@ export default new VueRouter({
         { path: 'search', component: Search },
       ]
     },
-    { 
-      path: '/play', 
-      component: GameSetup, 
-      children: [
-        { path: 'class-name', component: AddClassName },
-        { path: 'team-names', component: AddTeamNames },
-        { path: 'instructions', component: Instructions },
-        { path: '', redirect: 'class-name' }
-      ]
-    },
+    { path: '/game', component: AddClassName },
+    { path: '/game/:id', component: AddTeamNames },
     { path: '*', redirect: '/' }
   ]
 });
+
+
+
+// children: [
+//   { path: 'class-name', component: AddClassName },
+//   { path: 'team-names', component: AddTeamNames },
+//   { path: 'instructions', component: Instructions },
+//   { path: '', redirect: 'class-name' }
+// ]

@@ -28,25 +28,24 @@ export function getBoards() {
 }
 
 export function addGame(game) {
-  return fetch(GAMES_URL, {
+  return fetch(`${GAMES_URL}/${game.className}/${game.boardId}`, {
     method: 'POST',
     headers: getHeaders(),
-    body: JSON.stringify(game)
   })
     .then(responseHandler);
 }
 
-export function addTeam(team) {
-  return fetch(TEAMS_URL, {
+export function addTeam(teamName) {
+  return fetch(`${TEAMS_URL}/${teamName}`, {
     method: 'POST',
     headers: getHeaders(),
-    body: JSON.stringify(team)
   })
     .then(responseHandler);
 }
 
-export function getGame() {
-  return fetch(GAMES_URL, {
+export function addTeamGame(teamId, gameId) {
+  return fetch(`${TEAMS_URL}/games/${teamId}/${gameId}`, {
+    method: 'POST',
     headers: getHeaders(),
   })
     .then(responseHandler);

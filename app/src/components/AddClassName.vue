@@ -13,7 +13,12 @@
       <h2>Add Class Name</h2>
       <label>
         Class Name: 
-        <input type="text" v-model="className"> 
+        <input 
+          type="text" 
+          name="className" 
+          placeholder="Class Name" 
+          v-model="className" 
+          required>
       </label>
       <button @click="handleNext">Next</button>
     </form>
@@ -22,12 +27,13 @@
 
 <script>
 
-import { getBoards } from '../services/api';
+
+import { getBoards, addGame } from '../services/api';
 
 export default {
   props: {
-    game: Object,
-    onAdd: Function,
+    // game: Object,
+    // onAdd: Function,
   },
   data() {
     return {
@@ -57,14 +63,19 @@ export default {
   },
   methods: {
     handleNext() {
-      this.$router.push('team-names');
+      this.$router.push('/game/:id');
     },
     handleSubmit() {
+      
       const game = {
         className: this.className,
         boardId: this.boardId
       };
-      return this.onAdd(game);
+      return addGame(game)
+        .then(saved => {
+          this.game = saved;
+          this.$router.push(`/game/${this.game.id}`);
+        });
     }
   },
   components: {
