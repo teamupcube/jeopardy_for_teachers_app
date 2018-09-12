@@ -80,7 +80,7 @@ export default {
 
 .container {
   display: grid;
-  grid-template-columns: 10vw 10vw 10vw 10vw 10vw 10vw;
+  grid-template-columns: 15vw 15vw 15vw 15vw 15vw 15vw;
   /* grid-template-areas:
                       'cat1 cat2 cat3 cat4 cat5 cat6'; */
   grid-column-gap: 1vw;
