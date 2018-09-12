@@ -23,7 +23,7 @@
 
 <script>
 
-import { addTeam } from '../services/api';
+import { addTeam, addTeamGame } from '../services/api';
 
 export default {
   data() {
@@ -46,10 +46,10 @@ export default {
     },
     handleSubmit() {
       this.gameId = this.$route.params.id;
-      return addTeam(this.teamName, this.gameId)
+      return addTeam(this.teamName)
         .then(saved => {
           this.team = saved;
-          // this.$router.push(`/make-game/${this.category.boardId}/categories/${this.category.id}`);
+          addTeamGame(this.team.teamId,this.gameId)
         });
     }
   },
