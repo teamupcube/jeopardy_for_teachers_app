@@ -10,7 +10,6 @@
 
 <script>
 
-import { getBoards } from '../services/api';
 
 export default {
   props: {
