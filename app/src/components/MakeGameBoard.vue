@@ -30,7 +30,7 @@ export default {
       return addBoard(this.board)
         .then(saved => {
           this.board = saved;
-          this.$router.push(`/make-game/:id`)
+          this.$router.push(`/make-game/:id`);
         });
     }
   }
