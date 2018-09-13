@@ -172,3 +172,25 @@ export function getCategories(gameId) {
   })
     .then(responseHandler);
 }
+
+export function getScores(gameId) {
+  return fetch (`${URL}/scores/${gameId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
+export function deleteGames(gameId) {
+  return fetch(`${URL}/delete-game/${gameId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
+export function startGame(gameId, turn) {
+  return fetch(`${URL}/game/${gameId}/turn/${turn}`, {
+    method: 'PUT',
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
