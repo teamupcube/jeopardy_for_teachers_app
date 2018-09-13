@@ -9,14 +9,19 @@ git a
         <div class="box-cat">{{ category.category }}</div>
         <div v-for="clue in clues" 
           :key="clue.id">
-          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true">{{ clue.value }}</button>
+          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true; selectedClue = clue" >{{ clue.value }}</button>
         </div>
       </div>
     
 
-      <Modal v-if="showModal" @close="showModal = false">
-          <h3 slot="header">Clue:</h3>
-          <h2 slot="body">MODAL</h2>
+      <Modal v-if="showModal" @close="showModal = false; showAnswer = false">
+          <h3 slot="header"></h3>
+          <h2 slot="body">{{ selectedClue.clue }} 
+            <div v-if="showAnswer===true">{{ selectedClue.answer }}</div>
+            <button class="modal-default-button" @click="showAnswer = true">
+                Show Answer
+            </button>
+          </h2>
       </Modal>
     </div>
 
@@ -41,9 +46,15 @@ export default {
       showModal: false,
       categories: null,
       clues: null,
-      scores: null
+      scores: null,
+      showAnswer: false
     };
   },
+  // methods: {
+  //   showAnswer() {
+  //     selectedClue.answer;
+  //   }
+  // },
   created() {
     this.gameId = this.$route.params.id;
     getClues(this.gameId) 
