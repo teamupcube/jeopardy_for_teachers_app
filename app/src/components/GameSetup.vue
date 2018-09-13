@@ -25,22 +25,17 @@ export default {
     };
   },
   methods: {
-    handleAddClassName(game) {
-      return addGame(game)
-        .then(results => {
-          this.game = results;
-          console.log(this.game);
-        });
-    },
-    handleAddTeam(team) {
-      return addTeam(team);
-    }
+    // handleAddClassName(game) {
+    //   return addGame(game)
+    //     .then(results => {
+    //       this.game = results;
+    //     });
+    // },
+    // handleAddTeam(team) {
+    //   return addTeam(team);
+    // }
   },
   created() {
-    getGame()
-      .then(games => {
-        this.game = game
-      });
   }
 };
 </script>

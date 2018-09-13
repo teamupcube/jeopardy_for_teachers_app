@@ -4,7 +4,7 @@ const SEARCH_URL = `${URL}/search`;
 const GAMES_URL = `${URL}/games`;
 const BOARDS_URL = `${URL}/me/boards`;
 const TEAMS_URL = `${URL}/teams`;
-const RESULTS_URL = `${URL}/results`;
+// const RESULTS_URL = `${URL}/results`;
 const GAME_URL = `${URL}/game`;
 
 function responseHandler(response) {
@@ -152,7 +152,7 @@ export function addClue(clue, answer, value, category) {
     .then(responseHandler);
 }
 
-export function getGame(gameId) {
+export function getClues(gameId) {
   return fetch (`${GAME_URL}/${gameId}`, {
     headers: getHeaders()
   })

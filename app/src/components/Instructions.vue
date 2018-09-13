@@ -8,7 +8,7 @@
 <script>
 export default {
   created() {
-    this.gameId = this.$route.params.id
+    this.gameId = this.$route.params.id;
   }
 };
 </script>

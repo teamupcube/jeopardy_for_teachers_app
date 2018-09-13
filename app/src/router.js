@@ -22,7 +22,7 @@ export default new VueRouter({
     { path: '/board/:id', component: CategoryName },
     { path: '/game', component: AddClassName },
     { path: '/game/:id', component: AddTeamNames },
-    { path: '/game/:id/instructions', component: Instructions},
+    { path: '/game/:id/instructions', component: Instructions },
     { path: '/game/:id/gameplay', component: GamePlay },
     { 
       path: '/board/:id/categories/:categoryId/:categoryNumber', 

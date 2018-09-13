@@ -16,7 +16,7 @@ export default {
     clue: Object,
     categories: Array
   }
-}
+};
 </script>
 
 <style scoped>
