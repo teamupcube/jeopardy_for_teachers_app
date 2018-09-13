@@ -2,7 +2,7 @@
   <div class="teams">
     <form @submit.prevent="handleSubmit">
       <div class="team-list">
-        <div>
+        <div v-if="teams.length<4">
           <h2>Add Teams</h2>
           <label>
             Team Name: <input type="text" v-model="teamName"> 
@@ -11,13 +11,14 @@
         </div>
       </div>
     </form>
-      <button @click="handleNext">Done</button>
+    <h3>Teams:</h3>
     <ul>
       <li v-for="team in teams" 
         :key="team.id">
         {{ team.team }}
       </li>
     </ul>
+    <button @click="handleNext">Next</button>
   </div>
 
 </template>
@@ -30,7 +31,7 @@ export default {
   data() {
     return {
       teamName: '',
-      teams: null
+      teams: []
     };
   },
   props: {

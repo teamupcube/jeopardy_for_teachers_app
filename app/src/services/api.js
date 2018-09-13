@@ -172,3 +172,10 @@ export function getCategories(gameId) {
   })
     .then(responseHandler);
 }
+
+export function getScores(gameId) {
+  return fetch (`${URL}/scores/${gameId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
