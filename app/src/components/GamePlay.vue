@@ -9,13 +9,13 @@ git a
         <div class="box-cat">{{ category.category }}</div>
         <div v-for="clue in clues" 
           :key="clue.id">
-          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true">{{ clue.value }}</button>
+          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true; selectedClue = clue" >{{ clue.value }}</button>
         </div>
       </div>
 
       <Modal v-if="showModal" @close="showModal = false">
           <h3 slot="header">Clue:</h3>
-          <h2 slot="body">MODAL</h2>
+          <h2 slot="body">{{ selectedClue.clue }}</h2>
       </Modal>
     </div>
   </main>
@@ -36,6 +36,11 @@ export default {
       clues: null
     };
   },
+  // methods: {
+  //   show() {
+  //     this.$modal.show('hello');
+  //   }
+  // },
   created() {
     this.gameId = this.$route.params.id;
     getClues(this.gameId) 
@@ -48,6 +53,11 @@ export default {
         this.categories = saved;
         console.log(this.categories);
       });
+    // getClue(this.gameId)
+    //   .then(saved => {
+    //     this.selectedClue = saved;
+    //     console.log(this.clues);
+    //   });
   }
  
 };
