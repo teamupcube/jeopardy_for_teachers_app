@@ -9,13 +9,14 @@ git a
         <div class="box-cat">{{ category.category }}</div>
         <div v-for="clue in clues" 
           :key="clue.id">
-            <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true">{{ clue.value }}</button>
-            <Modal v-if="showModal" @close="showModal = false">
-              <h3 slot="header">Clue:</h3>
-              <h2 slot="body">{{ clue.clue }}</h2>
-            </Modal>
+          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true">{{ clue.value }}</button>
         </div>
       </div>
+
+      <Modal v-if="showModal" @close="showModal = false">
+          <h3 slot="header">Clue:</h3>
+          <h2 slot="body">MODAL</h2>
+      </Modal>
     </div>
   </main>
 </template>

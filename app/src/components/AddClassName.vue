@@ -32,8 +32,6 @@ import { getBoards, addGame } from '../services/api';
 
 export default {
   props: {
-    // game: Object,
-    // onAdd: Function,
   },
   data() {
     return {
