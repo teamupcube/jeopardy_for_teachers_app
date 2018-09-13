@@ -24,7 +24,7 @@ export default new VueRouter({
     { path: '/game/:id', component: AddTeamNames },
     { path: '/game/:id/gameplay', component: GamePlay },
     { 
-      path: '/board/:id/categories/:categoryId', 
+      path: '/board/:id/categories/:categoryId/:categoryNumber', 
       component: AddClueView,
       children: [
         { path: 'custom-clue', component: CustomClue },
