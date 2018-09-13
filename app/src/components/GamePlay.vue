@@ -24,18 +24,23 @@ git a
           </h2>
       </Modal>
     </div>
+    <div class="leaderboard">
+      <div>
+        <h3>Scoreboard</h3>
+        <ul v-for="score in scores" :key="score.id">
+          <p>Team {{ score.team }} has {{ score.score }} points</p>
+        </ul>
+      </div>
 
-    <h3>Scoreboard</h3>
-    <ul v-for="score in scores" :key="score.id">
-      <p>Team {{ score.team }} has {{ score.score }} points</p>
-    </ul>
+      <h3 :turn="turn">It is Team {{ turn[0].team }}'s turn</h3>
+    </div>
   
   </main>
 </template>
 
 <script>
 import Modal from './Modal';
-import { getClues, getCategories, getScores } from '../services/api';
+import { getClues, getCategories, getScores, getTeams, getTurn } from '../services/api';
 
 export default {
   components: {
@@ -47,7 +52,9 @@ export default {
       categories: null,
       clues: null,
       scores: null,
-      showAnswer: false
+      showAnswer: false,
+      teams: [],
+      turn: null
     };
   },
   methods: {
@@ -58,7 +65,6 @@ export default {
       event.target.className = 'clicked-button';
     }   
   },
-  
   created() {
     this.gameId = this.$route.params.id;
     getClues(this.gameId) 
@@ -72,9 +78,17 @@ export default {
     getScores(this.gameId)
       .then(saved => {
         this.scores = saved;
+      });
+    getTeams(this.gameId) 
+      .then(saved => {
+        this.teams = saved;
+      });
+    getTurn(this.gameId)
+      .then(saved => {
+        this.turn = saved;
+      })
         console.log(this.scores);
       });
-
   }
  
 };
@@ -115,5 +129,9 @@ export default {
   padding: 10px 0px;
 }
 
+.leaderboard {
+  display: flex;
+  justify-content: space-around
+}
 
 </style>

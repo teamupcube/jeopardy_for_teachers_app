@@ -182,6 +182,7 @@ export function getScores(gameId) {
 
 export function deleteGames(gameId) {
   return fetch(`${URL}/delete-game/${gameId}`, {
+    method: 'DELETE',
     headers: getHeaders()
   })
     .then(responseHandler);
@@ -190,6 +191,13 @@ export function deleteGames(gameId) {
 export function startGame(gameId, turn) {
   return fetch(`${URL}/game/${gameId}/turn/${turn}`, {
     method: 'PUT',
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
+export function getTurn(gameId) {
+  return fetch(`${URL}/get-turn/${gameId}`, {
     headers: getHeaders()
   })
     .then(responseHandler);

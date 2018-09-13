@@ -2,7 +2,7 @@
   <div>
     <div>
       <form @submit.prevent="handleAddCategory" class="category-form">
-        <div>Catergory Name: 
+        <div>Category Name: 
           <input 
             type="text" 
             name="category" 
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { addCategory } from '../services/api';
+import { addCategory, getCategories } from '../services/api';
 
 export default {
   props: {
@@ -31,11 +31,16 @@ export default {
       category: ''
     };
   },
+  created() {
+    this.board = this.$route.params.id;
+    console.log(this.board)
+    getCategories(this.board)
+  },
   methods: {
     handleAddCategory() {
       console.log('category categoryNumber', this.categoryNumber);
       this.board = this.$route.params.id;
-      this.categoryCount(this.categoryNumber);
+      // this.categoryCount(this.categoryNumber);
       return addCategory(this.category, this.board)
         .then(saved => {
           console.log('saved', saved);
