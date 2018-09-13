@@ -19,9 +19,14 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
+                            <button class="modal-default-button" @click="$emit('close')">
+                Correct
+              </button>
+                            <button class="modal-default-button" @click="$emit('close')">
+                Incorrect
+              </button>
+                            <button class="modal-default-button" @click="$emit('close')">
+                No Answer
               </button>
             </slot>
           </div>

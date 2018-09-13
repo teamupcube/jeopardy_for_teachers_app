@@ -13,9 +13,14 @@ git a
         </div>
       </div>
 
-      <Modal v-if="showModal" @close="showModal = false">
-          <h3 slot="header">Clue:</h3>
-          <h2 slot="body">{{ selectedClue.clue }}</h2>
+      <Modal v-if="showModal" @close="showModal = false; showAnswer = false">
+          <h3 slot="header"></h3>
+          <h2 slot="body">{{ selectedClue.clue }} 
+            <div v-if="showAnswer===true">{{ selectedClue.answer }}</div>
+            <button class="modal-default-button" @click="showAnswer = true">
+                Show Answer
+            </button>
+          </h2>
       </Modal>
     </div>
   </main>
@@ -33,12 +38,13 @@ export default {
     return {
       showModal: false,
       categories: null,
-      clues: null
+      clues: null,
+      showAnswer: false
     };
   },
   // methods: {
-  //   show() {
-  //     this.$modal.show('hello');
+  //   showAnswer() {
+  //     selectedClue.answer;
   //   }
   // },
   created() {
