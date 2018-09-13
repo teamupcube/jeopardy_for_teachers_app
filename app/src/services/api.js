@@ -158,3 +158,10 @@ export function getGame(gameId) {
   })
     .then(responseHandler);
 }
+
+export function getCategories(gameId) {
+  return fetch (`${URL}/categories/${gameId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}

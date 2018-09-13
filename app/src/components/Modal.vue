@@ -34,7 +34,9 @@
 
 <script>
 export default {
-  
+  props: {
+    clue: Object
+  }
 
 };
 </script>

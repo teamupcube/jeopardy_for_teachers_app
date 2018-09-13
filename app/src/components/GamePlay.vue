@@ -1,15 +1,20 @@
 git a
 <template>
   <main>
-  <!-- <GameCategory v-if="categories" v-for="(category) in categories" 
-    :key="category.id"/> -->
-      <div v-if="categories" v-for="category in categories" :key="category.id" class="column" id="cat_one">
-    <div class="box">{{ category.category }} </div>
-    <!-- <GameClue v-for="clue in clues" :key="clue.id"/> -->
-  </div>
-  
-
-
+    <div class="container">
+      <div v-if="categories" 
+        v-for="(category) in categories" 
+        :key="category.id" 
+        class="column">
+        <div class="box-cat">{{ category.category }}</div>
+        <div v-for="clue in clues" :key="clue.id">
+          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true"  >{{ clue.value }}</button>
+          <Modal v-if="showModal" @close="showModal = false">
+            <h3 slot="header">Clue: {{ clue.clue }}</h3>
+          </Modal>
+        </div>
+      </div>
+    </div>
 
 
 
@@ -64,48 +69,53 @@ git a
         <button class="box" id="show-modal" @click="showModal = true" >500</button>
       </div>
     </div> -->
-    <Modal v-if="showModal" @close="showModal = false">
-    <h3 slot="header">custom header</h3>
-    </Modal>
   </main>
 </template>
 
 <script>
 import Modal from './Modal';
 import GameCategory from './GameCategory';
-import { getGame } from '../services/api';
+import { getGame, getCategories } from '../services/api';
 
 export default {
   components: {
     Modal,
-    GameCategory
+    GameCategory,
   },
   data() {
     return {
       showModal: false,
-      categories: null
+      categories: null,
+      clues: null
     };
   },
   created() {
     this.gameId = this.$route.params.id;
     getGame(this.gameId) 
       .then(saved => {
-        this.categories = saved;
-        console.log(this.categories);
-        }
-      );
+        this.clues = saved;
+        console.log(this.clues);
+      });
+    getCategories(this.gameId)
+      .then(saved => {
+        this.categories = saved
+        console.log(this.categories)
+      });
+  },
+  computed: {
   }
 };
 </script>
 
 <style>
 
-
 .container {
   display: grid;
   grid-template-columns: 15vw 15vw 15vw 15vw 15vw 15vw;
   /* grid-template-areas:
                       'cat1 cat2 cat3 cat4 cat5 cat6'; */
+  /* grid-template-rows: 5vw 5vw 5vw 5vw 5vw 5vw;
+  grid-row-gap: 1vw; */
   grid-column-gap: 1vw;
 }
 
@@ -145,12 +155,24 @@ export default {
   grid-row-gap: 1vw;
 }
 
-.box {
+
+.box-cat {
   background-color: rgb(48, 48, 162);
   color: white;
-  font-family: 'Courier New', Courier, monospace
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  text-align: center;
+  padding: 15px 0px;
 }
 
+.box-clue {
+  background-color: rgb(48, 48, 162);
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0px;
+}
 
 
 </style>
