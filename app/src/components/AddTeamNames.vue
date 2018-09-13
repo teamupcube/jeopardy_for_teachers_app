@@ -12,30 +12,38 @@
       </div>
     </form>
       <button @click="handleNext">Done</button>
+    <ul>
+      <li v-for="team in teams" 
+        :key="team.id">
+        {{ team.team }}
+      </li>
+    </ul>
   </div>
+
 </template>
 
 <script>
 
-import { addTeam, addTeamGame } from '../services/api';
+import { addTeam, addTeamGame, getTeams } from '../services/api';
 
 export default {
   data() {
     return {
-      teamName: ''
+      teamName: '',
+      teams: null
     };
   },
   props: {
-    // team: Object,
-    // onAddTeam: Function,
-    // game: Object
+
   },
   created() {
     this.gameId = this.$route.params.id;
-
-  //   const team = this.team;
-  //   this.teamName = team.teamName;
+    getTeams(this.gameId) 
+      .then(saved => {
+        this.teams = saved;
+      });
   },
+
   methods: {
     handleNext() {
       this.$router.push(`/game/${this.gameId}/instructions`);
@@ -44,10 +52,11 @@ export default {
       this.gameId = this.$route.params.id;
       return addTeam(this.teamName)
         .then(saved => {
+          this.teams.push(saved)
           this.team = saved;
           addTeamGame(this.team.teamId, this.gameId);
         });
-    }
+    },
   },
 
 };
