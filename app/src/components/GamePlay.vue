@@ -52,12 +52,10 @@ export default {
   },
   methods: {
     handleClick(clue, event) {
-      this.showModal = true
-      this.selectedClue = clue
-      event.target.disabled = true
-      event.target.class = "clicked-button"
-
-
+      this.showModal = true;
+      this.selectedClue = clue;
+      event.target.disabled = true;
+      event.target.className = 'clicked-button';
     }   
   },
   
@@ -74,8 +72,8 @@ export default {
     getScores(this.gameId)
       .then(saved => {
         this.scores = saved;
-        console.log(this.scores)
-      })
+        console.log(this.scores);
+      });
 
   }
  
@@ -84,7 +82,13 @@ export default {
 
 <style>
 .clicked-button {
-  background-color: black
+  background-color: rgb(59, 59, 117);
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0px;
+
 }
 
 .container {

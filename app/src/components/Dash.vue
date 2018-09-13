@@ -46,9 +46,9 @@ export default {
     },
     handleDelete(i) {
       if(!confirm(`Are you sure you want to remove game ${this.games[i].class_name}`)) {
-        return
+        return;
       }
-      deleteGames(this.games[i].id)
+      deleteGames(this.games[i].id);
 
     }
 
