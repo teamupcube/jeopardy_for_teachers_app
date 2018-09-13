@@ -35,7 +35,7 @@ export default {
     handleAddCategory() {
       console.log('category categoryNumber', this.categoryNumber);
       this.board = this.$route.params.id;
-
+      this.categoryCount(this.categoryNumber);
       return addCategory(this.category, this.board)
         .then(saved => {
           console.log('saved', saved);
