@@ -10,7 +10,7 @@
           <li>Value: {{ previousClue.value }}</li>
         </ul>
       </div>
-    <RouterView :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
+    <RouterView :categoryNumber="categoryNumber" :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
   </div>
 </template>
 
@@ -18,6 +18,9 @@
 import { getData, addClue } from '../services/api';
 
 export default {
+  props: {
+    catgoryNumber: Number
+  },
   data() {
     return {
       clues: null,

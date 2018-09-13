@@ -22,24 +22,27 @@
 import { addCategory } from '../services/api';
 
 export default {
+  props: {
+    categoryNumber: Number,
+    categoryCount: Function
+  },
   data() {
     return {
-      category: '',
-      categoryNumber: null,
+      category: ''
     };
   },
   methods: {
     handleAddCategory() {
-      this.categoryNumber++;
-      console.log('categoryNumber', this.categoryNumber);
+      console.log('category categoryNumber', this.categoryNumber);
       this.board = this.$route.params.id;
+      this.categoryCount(this.categoryNumber);
       return addCategory(this.category, this.board)
         .then(saved => {
           console.log('saved', saved);
           this.category = saved;
           console.log('this.category', this.category.id);
-          console.log(`/board/${this.category.boardId}/categories/${this.category.id}/${this.categoryNumber}/custom-clue`);
-          this.$router.push(`/board/${this.category.boardId}/categories/${this.category.id}/${this.categoryNumber}/custom-clue`);
+          console.log(`/board/${this.category.boardId}/categories/${this.category.id}/custom-clue`);
+          this.$router.push(`/board/${this.category.boardId}/categories/${this.category.id}/custom-clue`);
         });
     }
   }
