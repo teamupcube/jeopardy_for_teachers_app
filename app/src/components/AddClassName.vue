@@ -20,7 +20,7 @@
           v-model="className" 
           required>
       </label>
-      <button @click="handleNext">Next</button>
+      <button>Next</button>
     </form>
   </div>
 </template>
@@ -62,9 +62,6 @@ export default {
       });
   },
   methods: {
-    handleNext() {
-      this.$router.push('/game/:id');
-    },
     handleSubmit() {
       
       const game = {

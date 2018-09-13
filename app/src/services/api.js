@@ -5,6 +5,7 @@ const GAMES_URL = `${URL}/games`;
 const BOARDS_URL = `${URL}/me/boards`;
 const TEAMS_URL = `${URL}/teams`;
 const RESULTS_URL = `${URL}/results`;
+const GAME_URL = `${URL}/game`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -147,6 +148,13 @@ export function addClue(clue, answer, value, category) {
   return fetch(`${URL}/me/categories/${category}/clues/${clue}/${answer}/${value}`, {
     method: 'POST',
     headers: getHeaders(),
+  })
+    .then(responseHandler);
+}
+
+export function getGame(gameId) {
+  return fetch (`${GAME_URL}/${gameId}`, {
+    headers: getHeaders()
   })
     .then(responseHandler);
 }

@@ -5,7 +5,7 @@ import AddClueView from './components/AddClueView';
 import Auth from './components/Auth';
 import AddClassName from './components/AddClassName';
 import AddTeamNames from './components/AddTeamNames';
-// import Instructions from './components/Instructions';
+import Instructions from './components/Instructions';
 import CategoryName from './components/CategoryName';
 import Search from './components/Search';
 import CustomClue from './components/CustomClue';
@@ -22,6 +22,7 @@ export default new VueRouter({
     { path: '/board/:id', component: CategoryName },
     { path: '/game', component: AddClassName },
     { path: '/game/:id', component: AddTeamNames },
+    { path: '/game/:id/instructions', component: Instructions},
     { path: '/game/:id/gameplay', component: GamePlay },
     { 
       path: '/board/:id/categories/:categoryId/:categoryNumber', 
@@ -38,9 +39,3 @@ export default new VueRouter({
 
 
 
-// children: [
-//   { path: 'class-name', component: AddClassName },
-//   { path: 'team-names', component: AddTeamNames },
-//   { path: 'instructions', component: Instructions },
-//   { path: '', redirect: 'class-name' }
-// ]

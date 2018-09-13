@@ -30,13 +30,15 @@ export default {
     // onAddTeam: Function,
     // game: Object
   },
-  // created() {
+  created() {
+    this.gameId = this.$route.params.id;
+
   //   const team = this.team;
   //   this.teamName = team.teamName;
-  // },
+  },
   methods: {
     handleNext() {
-      this.$router.push('instructions');
+      this.$router.push(`/game/${this.gameId}/instructions`);
     },
     handleSubmit() {
       this.gameId = this.$route.params.id;

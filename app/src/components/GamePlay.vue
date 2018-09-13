@@ -1,7 +1,19 @@
 git a
 <template>
   <main>
-  <h1>heyyyy</h1>
+  <!-- <GameCategory v-if="categories" v-for="(category) in categories" 
+    :key="category.id"/> -->
+      <div v-if="categories" v-for="category in categories" :key="category.id" class="column" id="cat_one">
+    <div class="box">{{ category.category }} </div>
+    <!-- <GameClue v-for="clue in clues" :key="clue.id"/> -->
+  </div>
+  
+
+
+
+
+
+  <!-- <h1>heyyyy</h1>
     <div class="container">
       <div class="column" id="cat_one">
         <div class="box">Cat 1</div>
@@ -51,7 +63,7 @@ git a
         <button class="box" id="show-modal" @click="showModal = true" >400</button>
         <button class="box" id="show-modal" @click="showModal = true" >500</button>
       </div>
-    </div>
+    </div> -->
     <Modal v-if="showModal" @close="showModal = false">
     <h3 slot="header">custom header</h3>
     </Modal>
@@ -60,18 +72,29 @@ git a
 
 <script>
 import Modal from './Modal';
+import GameCategory from './GameCategory';
+import { getGame } from '../services/api';
 
 export default {
   components: {
-    Modal
+    Modal,
+    GameCategory
   },
   data() {
     return {
-      showModal: false
-
+      showModal: false,
+      categories: null
     };
+  },
+  created() {
+    this.gameId = this.$route.params.id;
+    getGame(this.gameId) 
+      .then(saved => {
+        this.categories = saved;
+        console.log(this.categories);
+        }
+      );
   }
-
 };
 </script>
 
