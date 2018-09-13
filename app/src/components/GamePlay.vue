@@ -9,21 +9,33 @@ git a
         <div class="box-cat">{{ category.category }}</div>
         <div v-for="clue in clues" 
           :key="clue.id">
-          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true">{{ clue.value }}</button>
+          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="($event) => handleClick(clue, $event)" :value="clue"> {{ clue.value }}</button>
         </div>
       </div>
+    
 
-      <Modal v-if="showModal" @close="showModal = false">
-          <h3 slot="header">Clue:</h3>
-          <h2 slot="body">MODAL</h2>
+      <Modal v-if="showModal" @close="showModal = false; showAnswer = false">
+          <h3 slot="header"></h3>
+          <h2 slot="body">{{ selectedClue.clue }} 
+            <div v-if="showAnswer===true">{{ selectedClue.answer }}</div>
+            <button class="modal-default-button" @click="showAnswer = true">
+                Show Answer
+            </button>
+          </h2>
       </Modal>
     </div>
+
+    <h3>Scoreboard</h3>
+    <ul v-for="score in scores" :key="score.id">
+      <p>Team {{ score.team }} has {{ score.score }} points</p>
+    </ul>
+  
   </main>
 </template>
 
 <script>
 import Modal from './Modal';
-import { getClues, getCategories } from '../services/api';
+import { getClues, getCategories, getScores } from '../services/api';
 
 export default {
   components: {
@@ -33,27 +45,51 @@ export default {
     return {
       showModal: false,
       categories: null,
-      clues: null
+      clues: null,
+      scores: null,
+      showAnswer: false
     };
   },
+  methods: {
+    handleClick(clue, event) {
+      this.showModal = true;
+      this.selectedClue = clue;
+      event.target.disabled = true;
+      event.target.className = 'clicked-button';
+    }   
+  },
+  
   created() {
     this.gameId = this.$route.params.id;
     getClues(this.gameId) 
       .then(saved => {
         this.clues = saved;
-        console.log(this.clues);
       });
     getCategories(this.gameId)
       .then(saved => {
         this.categories = saved;
-        console.log(this.categories);
       });
+    getScores(this.gameId)
+      .then(saved => {
+        this.scores = saved;
+        console.log(this.scores);
+      });
+
   }
  
 };
 </script>
 
 <style>
+.clicked-button {
+  background-color: rgb(59, 59, 117);
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0px;
+
+}
 
 .container {
   display: grid;

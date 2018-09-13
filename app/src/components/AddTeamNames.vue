@@ -2,7 +2,7 @@
   <div class="teams">
     <form @submit.prevent="handleSubmit">
       <div class="team-list">
-        <div>
+        <div v-if="teams.length<4">
           <h2>Add Teams</h2>
           <label>
             Team Name: <input type="text" v-model="teamName"> 
@@ -11,26 +11,27 @@
         </div>
       </div>
     </form>
-      <button @click="handleNext">Done</button>
+    <h3>Teams:</h3>
     <ul>
       <li v-for="team in teams" 
         :key="team.id">
         {{ team.team }}
       </li>
     </ul>
+    <button @click="handleNext">Next</button>
   </div>
 
 </template>
 
 <script>
 
-import { addTeam, addTeamGame, getTeams } from '../services/api';
+import { addTeam, addTeamGame, getTeams, startGame } from '../services/api';
 
 export default {
   data() {
     return {
       teamName: '',
-      teams: null
+      teams: []
     };
   },
   props: {
@@ -46,6 +47,9 @@ export default {
 
   methods: {
     handleNext() {
+      let turn = this.teams[0].id;
+      this.gameId = this.$route.params.id;
+      startGame(this.gameId, turn)
       this.$router.push(`/game/${this.gameId}/instructions`);
     },
     handleSubmit() {
