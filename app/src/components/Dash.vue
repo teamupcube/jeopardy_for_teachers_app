@@ -26,17 +26,17 @@ export default {
   data() {
     return {
       games: null
-    }
+    };
   },
   created() {
     getGames()
       .then(games => {
-        console.log(games)
+        console.log(games);
         this.games = games;
       })
       .catch(err => {
         this.error = err;
-      })
+      });
   }
 };
 </script>

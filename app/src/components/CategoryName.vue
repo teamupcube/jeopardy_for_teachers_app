@@ -1,15 +1,21 @@
 <template>
-  <form @submit.prevent="handleAddCategory" class="category-form">
-    <div>Catergory Name: 
-      <input 
-        type="text" 
-        name="category" 
-        placeholder="Category" 
-        v-model="category" 
-        required/>
+  <div>
+    <div>
+      <form @submit.prevent="handleAddCategory" class="category-form">
+        <div>Catergory Name: 
+          <input 
+            type="text" 
+            name="category" 
+            placeholder="Category"
+            v-model="category"
+            required/>
+        </div>
+        <button>Submit</button>
+      </form>
     </div>
-    <button>Submit</button>
-  </form>
+    <div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -18,18 +24,22 @@ import { addCategory } from '../services/api';
 export default {
   data() {
     return {
-      category: ''
+      category: '',
+      categoryNumber: null,
     };
   },
   methods: {
     handleAddCategory() {
-      console.log('make category route', this.$route.params.id);
+      this.categoryNumber++;
+      console.log('categoryNumber', this.categoryNumber);
       this.board = this.$route.params.id;
       return addCategory(this.category, this.board)
         .then(saved => {
           console.log('saved', saved);
           this.category = saved;
-          this.$router.push(`/board/${this.category.boardId}/categories/${this.category.id}/custom-clue`);
+          console.log('this.category', this.category.id);
+          console.log(`/board/${this.category.boardId}/categories/${this.category.id}/${this.categoryNumber}/custom-clue`);
+          this.$router.push(`/board/${this.category.boardId}/categories/${this.category.id}/${this.categoryNumber}/custom-clue`);
         });
     }
   }
