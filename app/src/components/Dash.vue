@@ -5,6 +5,7 @@
     <router-link to="/game">Play Game</router-link>
     <router-link @click="categoryCount" to="/board">Make New Game Board</router-link>
     <RouterView :categoryCount="categoryCount" :categoryNumber="categoryNumber"></RouterView>
+    <h3>Your Games:</h3>
     <ul>
       <li v-for="game in games" :key="game.id">
         {{ game.class_name }}
