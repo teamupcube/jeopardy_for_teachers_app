@@ -4,7 +4,8 @@ const SEARCH_URL = `${URL}/search`;
 const GAMES_URL = `${URL}/games`;
 const BOARDS_URL = `${URL}/me/boards`;
 const TEAMS_URL = `${URL}/teams`;
-const RESULTS_URL = `${URL}/results`;
+// const RESULTS_URL = `${URL}/results`;
+const GAME_URL = `${URL}/game`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -61,6 +62,13 @@ export function addTeamGame(teamId, gameId) {
 
 export function getResults(gameId) {
   return fetch (`RESULTS_URL/${gameId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+} 
+
+export function getTeams(gameId) {
+  return fetch (`${URL}/teams/${gameId}`, {
     headers: getHeaders()
   })
     .then(responseHandler);
@@ -147,6 +155,20 @@ export function addClue(clue, answer, value, category) {
   return fetch(`${URL}/me/categories/${category}/clues/${clue}/${answer}/${value}`, {
     method: 'POST',
     headers: getHeaders(),
+  })
+    .then(responseHandler);
+}
+
+export function getClues(gameId) {
+  return fetch (`${GAME_URL}/${gameId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
+export function getCategories(gameId) {
+  return fetch (`${URL}/categories/${gameId}`, {
+    headers: getHeaders()
   })
     .then(responseHandler);
 }

@@ -1,5 +1,6 @@
 <template>
-  
+  <div>
+  </div>
 </template>
 
 <script>
@@ -10,19 +11,19 @@ export default {
   data() {
     return {
       results: null
-    }
+    };
   },
   created() {
     getResults()
       .then(results => {
-        console.log(results)
+        console.log(results);
         this.results = results;
       })
       .catch(err => {
         this.error = err;
-      })
+      });
   }
-}
+};
 </script>
 
 <style>
