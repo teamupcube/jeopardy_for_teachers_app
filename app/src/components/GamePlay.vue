@@ -86,11 +86,8 @@ export default {
     getTurn(this.gameId)
       .then(saved => {
         this.turn = saved;
-      })
-        console.log(this.scores);
       });
   }
- 
 };
 </script>
 
