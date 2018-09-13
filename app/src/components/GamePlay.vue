@@ -9,7 +9,7 @@ git a
         <div class="box-cat">{{ category.category }}</div>
         <div v-for="clue in clues" 
           :key="clue.id">
-          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true; selectedClue = clue" >{{ clue.value }}</button>
+          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="($event) => handleClick(clue, $event)" :value="clue"> {{ clue.value }}</button>
         </div>
       </div>
     
@@ -57,6 +57,14 @@ export default {
       turn: null
     };
   },
+  methods: {
+    handleClick(clue, event) {
+      this.showModal = true;
+      this.selectedClue = clue;
+      event.target.disabled = true;
+      event.target.className = 'clicked-button';
+    }   
+  },
   created() {
     this.gameId = this.$route.params.id;
     getClues(this.gameId) 
@@ -79,13 +87,23 @@ export default {
       .then(saved => {
         this.turn = saved;
       })
-
+        console.log(this.scores);
+      });
   }
  
 };
 </script>
 
 <style>
+.clicked-button {
+  background-color: rgb(59, 59, 117);
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0px;
+
+}
 
 .container {
   display: grid;
