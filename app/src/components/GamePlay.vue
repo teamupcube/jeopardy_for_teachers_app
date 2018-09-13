@@ -12,6 +12,7 @@ git a
           <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true; selectedClue = clue" >{{ clue.value }}</button>
         </div>
       </div>
+    
 
       <Modal v-if="showModal" @close="showModal = false; showAnswer = false">
           <h3 slot="header"></h3>
@@ -23,12 +24,18 @@ git a
           </h2>
       </Modal>
     </div>
+
+    <h3>Scoreboard</h3>
+    <ul v-for="score in scores" :key="score.id">
+      <p>Team {{ score.team }} has {{ score.score }} points</p>
+    </ul>
+  
   </main>
 </template>
 
 <script>
 import Modal from './Modal';
-import { getClues, getCategories } from '../services/api';
+import { getClues, getCategories, getScores } from '../services/api';
 
 export default {
   components: {
@@ -39,6 +46,7 @@ export default {
       showModal: false,
       categories: null,
       clues: null,
+      scores: null,
       showAnswer: false
     };
   },
@@ -52,18 +60,17 @@ export default {
     getClues(this.gameId) 
       .then(saved => {
         this.clues = saved;
-        console.log(this.clues);
       });
     getCategories(this.gameId)
       .then(saved => {
         this.categories = saved;
-        console.log(this.categories);
       });
-    // getClue(this.gameId)
-    //   .then(saved => {
-    //     this.selectedClue = saved;
-    //     console.log(this.clues);
-    //   });
+    getScores(this.gameId)
+      .then(saved => {
+        this.scores = saved;
+        console.log(this.scores)
+      })
+
   }
  
 };
