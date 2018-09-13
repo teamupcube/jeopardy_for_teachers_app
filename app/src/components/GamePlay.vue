@@ -70,6 +70,7 @@ export default {
         this.scores = saved;
         console.log(this.scores)
       })
+
   }
  
 };
