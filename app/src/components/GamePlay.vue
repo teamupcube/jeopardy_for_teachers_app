@@ -11,9 +11,9 @@ git a
           :key="clue.id">
             <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="showModal = true">{{ clue.value }}</button>
             <Modal v-if="showModal" @close="showModal = false">
-            <h3 slot="header">Clue:</h3>
-            <h2 slot="body">{{ clue.clue }}</h2>
-          </Modal>
+              <h3 slot="header">Clue:</h3>
+              <h2 slot="body">{{ clue.clue }}</h2>
+            </Modal>
         </div>
       </div>
     </div>

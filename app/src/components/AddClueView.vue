@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-      <router-link :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</router-link><br/>
-      <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link>
+      <router-link :to="`/board/${board}/categories/${category}/${categoryNumber}/custom-clue`">Create Custom Clue</router-link><br/>
+      <router-link :to="`/board/${board}/categories/${category}/${categoryNumber}/search`">Search Jeopardy Database for a Clue</router-link>
       <div v-if="previousClue">
         <p>Your previous clue, answer, and point value were saved as:</p>
         <ul>
@@ -10,7 +10,7 @@
           <li>Value: {{ previousClue.value }}</li>
         </ul>
       </div>
-    <RouterView :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
+    <RouterView :categoryNumber="categoryNumber" :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
   </div>
 </template>
 
@@ -29,6 +29,7 @@ export default {
   created() {
     this.category = this.$route.params.categoryId;
     this.board = this.$route.params.id;
+    this.categoryNumber = this.$route.params.categoryNumber;
     console.log('board', this.board);
   },
   methods: {
@@ -55,9 +56,11 @@ export default {
           this.value = null;
           console.log('prev clue', this.previousClue);
           if(this.clueNumber < 5) {
-            this.$router.push(`/board/${this.board}/categories/${this.category}/${view}`);
+            this.$router.push(`/board/${this.board}/categories/${this.category}/${this.categoryNumber}/${view}`);
           } 
           else {
+            this.categoryNumber++;
+            console.log('clue categoryNumber', this.categoryNumber);
             this.$router.push(`/board/${this.board}`);
           }
         });
