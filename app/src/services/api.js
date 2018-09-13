@@ -179,3 +179,10 @@ export function getScores(gameId) {
   })
     .then(responseHandler);
 }
+
+export function deleteGames(gameId) {
+  return fetch(`${URL}/delete-game/${gameId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
