@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "copy": "rm -rf ../../jeopardy_for_teachers_server/server/public && cp -R ./dist ../../jeopardy_for_teachers_server/server/public",
+    "copy": "rm -rf ../../jeopardy_for_teachers_server/public && cp -R ./dist ../../jeopardy_for_teachers_server/public",
     "build:server": "npm run build && npm run copy"
   },
   "dependencies": {

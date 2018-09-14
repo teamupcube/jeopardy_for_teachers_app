@@ -122,8 +122,8 @@ export function checkForToken() {
 }
 
 export function getData(keywords) {
+  console.log('api keywords', keywords);
   return fetch(`${SEARCH_URL}/${keywords}`, {
-    
     headers: getHeaders()
   })
     .then(responseHandler);

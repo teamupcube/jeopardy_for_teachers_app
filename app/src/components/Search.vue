@@ -10,12 +10,12 @@
           placeholder="Enter your keywords" 
           v-model="keywords"
           required>
-      <button>Search</button>
+      <button @click="handleSubmit">Search</button>
       </div>
     </form>
     <div 
       v-if="historicClues"
-      v-for="(historicClue) in historicClues"
+      v-for="historicClue in historicClues"
       :key="historicClue.id">
       <div id="search-results">
         <h4>Results</h4>
@@ -43,7 +43,7 @@ export default {
   props: {
     onSearch: Function,
     historicClues: Array,
-    onAdd: Function,
+    onAdd: Function
   },
   data() {
     return {
@@ -57,6 +57,7 @@ export default {
   methods: {
     handleSubmit() {
       this.onSearch(this.keywords);
+      console.log('search keywords', this.keywords);
     },
     handleAdd(event) {
       let clues = this.historicClues;
@@ -67,7 +68,6 @@ export default {
           this.answer = clues[i].answer;
         }
       }
-      console.log('clue', this.clue, this.answer, this.value);
       this.onAdd(this.clue, this.answer, this.value, this.view);
     }
 

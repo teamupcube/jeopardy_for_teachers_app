@@ -42,12 +42,15 @@ export default {
   methods: {
     handleSearch(keywords) {
       this.keywords = keywords;
-      this.searchData();
+      console.log('handle search', this.keywords);
+      this.searchData(this.keywords);
     },
     searchData() {
       getData(this.keywords)
         .then(clues => {
+          console.log('return search view', clues);
           this.clues = clues;
+          console.log('view clues', this.clues);
           return this.clues;
         });
     },
