@@ -30,13 +30,6 @@
             <button class="modal-default-button" @click="showAnswer = true">
                 Show Answer
             </button>
-            <br>
-              <button class="modal-default-button" @click="showAnswer = true">
-                Incorrect
-            </button>
-            <button class="modal-default-button" @click="showAnswer = true">
-               Incorrect
-            </button>
           </h2>
       </Modal>
     </div>
