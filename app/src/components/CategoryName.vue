@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="category">
       <form @submit.prevent="handleAddCategory" class="category-form">
         <div>Category Name: 
           <input 
@@ -55,6 +55,13 @@ export default {
 </script>
 
 <style>
+.category {
+  margin-top: 7%;
+}
+
+.category button {
+  margin-top: 2%;
+}
 
 </style>
 

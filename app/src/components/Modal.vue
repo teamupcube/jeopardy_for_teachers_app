@@ -19,13 +19,13 @@
 
           <div class="modal-footer">
             <slot name="footer">
-                            <button class="modal-default-button" @click="$emit('close')">
+                            <button class="score-buttons" @click="$emit('close')">
                 Correct
               </button>
-                            <button class="modal-default-button" @click="$emit('close')">
+                            <button class="score-buttons" @click="$emit('close')">
                 Incorrect
               </button>
-                            <button class="modal-default-button" @click="$emit('close')">
+                            <button class="score-buttons" @click="$emit('close')">
                 No Answer
               </button>
             </slot>
@@ -85,7 +85,7 @@ export default {
 }
 
 .modal-default-button {
-  float: right;
+  margin: 1px;
 }
 
 /*
@@ -110,4 +110,10 @@ export default {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+.modal-footer {
+  margin-top: 7%;
+  text-align: center;
+}
+
 </style>

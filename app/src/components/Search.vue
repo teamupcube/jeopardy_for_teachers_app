@@ -10,17 +10,18 @@
           placeholder="Enter your keywords" 
           v-model="keywords"
           required>
-      </div>
       <button>Search</button>
+      </div>
     </form>
     <div 
       v-if="historicClues"
       v-for="(historicClue) in historicClues"
       :key="historicClue.id">
-      <div>
+      <div id="search-results">
         <h4>Results</h4>
         <p>Clue: {{ historicClue.clue }}</p>
         <p>Answer: {{ historicClue.answer }}</p>
+        <div class="select-points">
           <label>Select point value
             <select name="value" v-model="value">
             <option :value="100" >100</option>
@@ -31,6 +32,7 @@
           </select>
           </label>
           <button @click="handleAdd" :value="historicClue.id">Add this clue to your board</button>
+        </div>
       </div>
     </div>
   </div>
@@ -75,5 +77,22 @@ export default {
 </script>
 
 <style>
+#search-results {
+  text-align: center;
+  width: 70%;
+  margin: 60px auto;
+}
+
+#search-results p {
+  text-align: left;
+}
+
+.select-points {
+  margin-top: 4%;
+}
+
+.select-points button {
+  margin-left: 5%;
+}
 
 </style>

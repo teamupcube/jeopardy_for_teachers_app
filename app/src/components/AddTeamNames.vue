@@ -49,14 +49,14 @@ export default {
     handleNext() {
       let turn = this.teams[0].id;
       this.gameId = this.$route.params.id;
-      startGame(this.gameId, turn)
+      startGame(this.gameId, turn);
       this.$router.push(`/game/${this.gameId}/instructions`);
     },
     handleSubmit() {
       this.gameId = this.$route.params.id;
       return addTeam(this.teamName)
         .then(saved => {
-          this.teams.push(saved)
+          this.teams.push(saved);
           this.team = saved;
           addTeamGame(this.team.teamId, this.gameId);
         });
@@ -71,10 +71,17 @@ export default {
 .team-list {
   display: flex;
   justify-content: space-around;
+  padding-top: 5%;
+}
+
+.team-list h2 {
+  padding-bottom: 3%;
 }
 
 .teams {
   text-align: center;
 }
+
+
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="next">
     <h1>Instructions</h1>
     <router-link :to="`/game/${this.gameId}/gameplay`">Next</router-link>
   </div>
@@ -19,5 +19,7 @@ export default {
 </script>
 
 <style>
-
+.next {
+  text-align: center;
+}
 </style>

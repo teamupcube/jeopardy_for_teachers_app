@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="clue-router">
       <router-link :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</router-link><br/>
       <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link>
-      <div v-if="previousClue">
+      <div id="saved-clue" v-if="previousClue">
         <p>Your previous clue, answer, and point value were saved as:</p>
         <ul>
           <li>Clue: {{ previousClue.clue }}</li>
@@ -76,5 +76,14 @@ export default {
 </script>
 
 <style>
+#clue-router {
+  text-align: center;
+  margin: 3%;
+}
+
+#saved-clue { 
+  text-align: center;
+  margin-top: 5%;
+}
 
 </style>

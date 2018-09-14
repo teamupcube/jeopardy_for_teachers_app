@@ -105,6 +105,7 @@ export default {
   display: grid;
   grid-template-columns: 15vw 15vw 15vw 15vw 15vw 15vw;
   grid-column-gap: 1vw;
+  margin: 3%;
 }
 
 .box-cat {
