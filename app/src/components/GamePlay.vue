@@ -1,7 +1,7 @@
 <template>
   <main>
     <div>
-      <h3 v-if="turn">It is ?Team {{ turn[0].turn }}'s turn</h3>
+      <h3 v-if="turn">It is Team {{ turn[0].turn }}'s turn</h3>
       <form v-if="!turn" @submit.prevent="handleSelectTurn">
         <h3>Who's wants to start first?</h3>
         <select v-model="selected">
@@ -48,7 +48,7 @@
 
 <script>
 import Modal from './Modal';
-import { getClues, getCategories, getScores, getTeams, getTurn, startGame } from '../services/api';
+import { getClues, getCategories, getScores, getTeams, newTurn, getTurn, startGame } from '../services/api';
 
 export default {
   components: {
@@ -72,6 +72,24 @@ export default {
       this.selectedClue = clue;
       event.target.disabled = true;
       event.target.className = 'clicked-button';
+      let changeTurn = function(turn, teams) {
+        let teamLength = teams.length
+        
+        for(let i=0; i<=teamLength-1; i=i+1) {
+          if(i === teamLength-1) {
+            console.log("hi")
+            turn[0].turn = teams[0].team;
+            return turn;
+          }
+          if(turn[0].turn === teams[i].team) {
+            turn[0].turn = teams[i+1].team;
+            return turn;
+          }
+        }
+        return turn;
+      }      
+      changeTurn(this.turn, this.teams);
+      // newTurn(this.gameId, this.turn);
     },
     handleSelectTurn() {
       this.turn = this.selected;
@@ -96,7 +114,7 @@ export default {
     getTeams(this.gameId) 
       .then(saved => {
         this.teams = saved;
-        console.log(this.teams)
+        // console.log(this.teams)
       });
     getTurn(this.gameId)
         .then(saved => {

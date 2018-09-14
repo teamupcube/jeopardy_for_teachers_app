@@ -203,6 +203,13 @@ export function getTurn(gameId) {
     .then(responseHandler);
 }
 
+export function newTurn(gameId, turn) {
+  return fetch(`${URL}/game/${gameId}/new-turn/${turn}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
 export function categoryCount(categoryCount) {
   return categoryCount++;
 }
