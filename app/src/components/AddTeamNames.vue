@@ -68,10 +68,17 @@ export default {
 .team-list {
   display: flex;
   justify-content: space-around;
+  padding-top: 5%;
+}
+
+.team-list h2 {
+  padding-bottom: 3%;
 }
 
 .teams {
   text-align: center;
 }
+
+
 
 </style>

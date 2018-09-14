@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="clue-router">
       <router-link :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</router-link><br/>
       <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link><br/>
       <router-link :to="`/board/${board}/categories/${category}/your-board`">Your Board</router-link>
@@ -83,5 +83,14 @@ export default {
 </script>
 
 <style>
+#clue-router {
+  text-align: center;
+  margin: 3%;
+}
+
+#saved-clue { 
+  text-align: center;
+  margin-top: 5%;
+}
 
 </style>

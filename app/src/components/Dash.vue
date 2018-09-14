@@ -2,17 +2,20 @@
   <div v-if="user">
     <h1>Dashboard</h1>
     <br>
-    <router-link to="/game">Play Game</router-link>
-    <router-link to="/board">Make New Game Board</router-link>
+    <div id="options">
+      <router-link to="/game">Play Game</router-link>
+      <router-link to="/board">Make New Game Board</router-link>
+    </div>
     <RouterView></RouterView>
+    <div id="game-box">
     <h3>Your Games:</h3>
-    <ul>
-      <li v-for="(game, i) in games" :key="game.id">
-        {{ game.class_name }}
-        <button @click="handleDelete(i)">Delete</button>
-      </li>
-    </ul>
-  
+      <ul>
+        <li v-for="(game, i) in games" :key="game.id">
+          {{ game.class_name }}
+          <button @click="handleDelete(i)">Delete</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -65,6 +68,38 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
+
+
+#options {
+  text-align: center;
+}
+
+#options a {
+  margin: 0 2%;
+}
+
+h2, h3, h4 {
+   text-align: center;
+   margin: 5% 0 2% 0;
+}
+
+ul {
+  text-align: center;
+  list-style: inside;
+  margin-left: -50px;
+  padding-bottom: 3%;
+}
+
+#game-box {
+  border: .2px solid black;
+  width: 35%;
+  margin: 10% auto;
+  padding: 1% 0 4% 0;
+}
+
+form {
+  text-align: center;
+}
 
 </style>

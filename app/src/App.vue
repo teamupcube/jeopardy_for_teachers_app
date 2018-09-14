@@ -1,18 +1,15 @@
 <template>
   <div id="app">
+    <p id="logo">Jeopardy!</p>
     <header>
-      <h1>Jeopardy!</h1>
+      <a v-if="user" href="/">Home</a>
       <RouterLink v-if="!user" to="/auth">Sign in</RouterLink>
       <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
-      &nbsp;
-      <a v-if="user" href="/">Home</a>
       <router-link to="/board" v-if="user"></router-link>
       <router-link v-if="user" to="/"></router-link>
-      &nbsp;
-      <span v-if="user">user: {{ user.name }}</span> 
-
+      <span class="user" v-if="user">user: {{ user.name }}</span> 
     </header>
-    <RouterView :onUser="handleUser" :user="user"></RouterView>
+    <RouterView class="routes" :onUser="handleUser" :user="user"></RouterView>
   </div>
 </template>
 
@@ -46,4 +43,48 @@ export default {
 </script>
 
 <style>
+
+* {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#logo {
+  text-align: center;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+h1 {
+  text-align: center;
+  margin: 5%;
+}
+
+header {
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    background-color: rgb(59, 59, 117);
+    height: 20px;
+    color: white;
+    text-align: center
+}
+
+header a {
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+header a:hover {
+    background-color: rgb(82, 137, 255);
+}
+
+.user {
+  text-align: left;
+  margin-right: 0;
+}
+
 </style>
