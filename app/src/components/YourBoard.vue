@@ -58,7 +58,7 @@ export default {
       .then(saved => {
         this.clues = saved;
       });
-    getBoardCategories(this.gameId)
+    getBoardCategories(this.boardId)
       .then(saved => {
         this.categories = saved;
       });

@@ -206,3 +206,17 @@ export function getTurn(gameId) {
 export function categoryCount(categoryCount) {
   return categoryCount++;
 }
+
+export function getBoardClues(boardId) {
+  return fetch (`${BOARDS_URL}/${boardId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
+export function getBoardCategories(boardId) {
+  return fetch (`${BOARDS_URL}/categories/${boardId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
