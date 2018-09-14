@@ -188,7 +188,7 @@ export function deleteGame(gameId) {
     .then(responseHandler);
 }
 
-export function startGame(gameId, turn) {
+export function setTurn(gameId, turn) {
   return fetch(`${URL}/game/${gameId}/turn/${turn}`, {
     method: 'PUT',
     headers: getHeaders()
