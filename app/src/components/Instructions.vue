@@ -7,12 +7,12 @@
 
 <script>
 
-import { addTeam, addTeamGame, getTeams, startGame } from '../services/api';
+// import { addTeam, addTeamGame, getTeams, startGame } from '../services/api';
 
 
 export default {
   created() {
-    console.log(this.$route.params)
+    console.log(this.$route.params);
     this.gameId = this.$route.params.id;
   }
 };
