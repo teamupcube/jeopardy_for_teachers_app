@@ -14,22 +14,19 @@
           <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="($event) => handleClick(clue, $event)" :value="clue"> {{ clue.value }}</button>
         </div>
       </div>
-      <Modal v-if="showModal" @close="showModal = false; showAnswer = false">
+      <BoardModal v-if="showModal" @close="showModal = false; showAnswer = false">
           <h3 slot="header"></h3>
-          <h2 slot="body">{{ selectedClue.clue }} 
-            <div v-if="showAnswer===true">{{ selectedClue.answer }}</div>
-            <button class="modal-default-button" @click="showAnswer = true">
-                Show Answer
-            </button>
+          <h2 slot="body">Clue: {{ selectedClue.clue }} 
+            <div>Answer: {{ selectedClue.answer }}</div>
           </h2>
-      </Modal>
+      </BoardModal>
     </div>
     
   </main>
 </template>
 
 <script>
-import Modal from './Modal';
+import BoardModal from './Modal';
 import { getBoardClues, getBoardCategories } from '../services/api';
 
 export default {
@@ -37,7 +34,7 @@ export default {
     message: String
   },
   components: {
-    Modal,
+    BoardModal,
   },
   data() {
     return {
