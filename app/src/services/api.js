@@ -208,7 +208,7 @@ export function categoryCount(categoryCount) {
 }
 
 export function getBoardClues(boardId) {
-  return fetch (`${BOARDS_URL}/${boardId}`, {
+  return fetch (`${BOARDS_URL}/clues/${boardId}`, {
     headers: getHeaders()
   })
     .then(responseHandler);
