@@ -1,6 +1,16 @@
 <template>
   <main>
-    <div class="container">
+    <div>
+      <h3 v-if="turn">It is ?Team {{ turn[0].turn }}'s turn</h3>
+      <form v-if="!turn" @submit.prevent="handleSelectTurn">
+        <h3>Who's wants to start first?</h3>
+        <select v-model="selected">
+          <option :selected="team.team" v-for="team in teams" :key="team.id">{{ team.team }}</option>
+        </select>
+        <button>Select</button>
+      </form>
+    </div>
+    <div v-if="turn" class="container">
       <div v-if="categories" 
         v-for="(category) in categories" 
         :key="category.id" 
@@ -23,23 +33,22 @@
           </h2>
       </Modal>
     </div>
-    <div class="leaderboard">
+    <div v-if="turn" class="leaderboard">
       <div>
         <h3>Scoreboard</h3>
         <ul v-for="score in scores" :key="score.id">
           <p>Team {{ score.team }} has {{ score.score }} points</p>
         </ul>
       </div>
-
-      <!-- <h3 :turn="turn">It is Team {{ turn[0].team }}'s turn</h3> -->
     </div>
+  
   
   </main>
 </template>
 
 <script>
 import Modal from './Modal';
-import { getClues, getCategories, getScores, getTeams, getTurn } from '../services/api';
+import { getClues, getCategories, getScores, getTeams, getTurn, startGame } from '../services/api';
 
 export default {
   components: {
@@ -53,7 +62,8 @@ export default {
       scores: null,
       showAnswer: false,
       teams: [],
-      turn: null
+      turn: null,
+      selected: null
     };
   },
   methods: {
@@ -62,6 +72,11 @@ export default {
       this.selectedClue = clue;
       event.target.disabled = true;
       event.target.className = 'clicked-button';
+    },
+    handleSelectTurn() {
+      this.turn = this.selected;
+      this.gameId = this.$route.params.id;
+      startGame(this.gameId, this.turn)
     }   
   },
   created() {
@@ -81,11 +96,14 @@ export default {
     getTeams(this.gameId) 
       .then(saved => {
         this.teams = saved;
+        console.log(this.teams)
       });
     getTurn(this.gameId)
-      .then(saved => {
-        this.turn = saved;
-      });
+        .then(saved => {
+          if(saved.length>0) {
+            this.turn = saved;
+          }
+        })
   }
 };
 </script>
