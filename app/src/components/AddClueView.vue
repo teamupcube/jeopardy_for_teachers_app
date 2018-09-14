@@ -1,8 +1,9 @@
 <template>
   <div id="clue-router">
       <router-link :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</router-link><br/>
-      <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link>
-      <div id="saved-clue" v-if="previousClue">
+      <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link><br/>
+      <router-link :to="`/board/${board}/categories/${category}/your-board`">Your Board</router-link>
+      <div v-if="previousClue">
         <p>Your previous clue, answer, and point value were saved as:</p>
         <ul>
           <li>Clue: {{ previousClue.clue }}</li>
@@ -10,31 +11,33 @@
           <li>Value: {{ previousClue.value }}</li>
         </ul>
       </div>
-    <!-- <RouterView :categoryNumber="categoryNumber" :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView> -->
-    <RouterView :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
-  
+    <RouterView :message="message" :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
   </div>
 </template>
 
 <script>
-import { getData, addClue } from '../services/api';
+import { getData, addClue, getCategoryNumber } from '../services/api';
 
 export default {
-  props: {
-    catgoryNumber: Number
-  },
   data() {
     return {
       clues: null,
       keywords: '',
       clueNumber: null,
-      previousClue: null
+      previousClue: null,
+      categoryNumber: null,
+      message: ''
     };
   },
   created() {
     this.category = this.$route.params.categoryId;
     this.board = this.$route.params.id;
-    console.log('board', this.board);
+    getCategoryNumber(this.board)
+      .then(saved => {
+        this.categoryNumber = saved.count;
+        console.log('cat', this.categoryNumber);
+      });
+
   },
   methods: {
     handleSearch(keywords) {
@@ -50,20 +53,24 @@ export default {
     },
     handleCustomClue(clue, answer, value, view) {
       this.clueNumber++;
-      console.log('clueNumber', this.clueNumber);
-      console.log('make category route', this.category);
+      console.log('clue num', this.clueNumber);
       return addClue(clue, answer, value, this.category)
         .then(saved => {
           this.previousClue = saved;
           this.clue = '';
           this.answer = '';
           this.value = null;
-          console.log('prev clue', this.previousClue);
-          if(this.clueNumber < 5) {
+          if(this.clueNumber < 5 && this.categoryNumber <= 6) {
             this.$router.push(`/board/${this.board}/categories/${this.category}/${view}`);
           } 
-          else {
+          else if(this.clueNumber === 5 && this.categoryNumber < 6) {
             this.$router.push(`/board/${this.board}`);
+          }
+          else if(this.clueNumber === 5 && this.categoryNumber >= 6) {
+            this.message = 'You have finished your game board!';
+            this.$router.push(`/board/${this.board}/categories/${this.category}/your-board`);
+          } else {
+            alert('an error has occured');
           }
         });
     },

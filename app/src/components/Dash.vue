@@ -3,10 +3,10 @@
     <h1>Dashboard</h1>
     <br>
     <div id="options">
-      <router-link  to="/game">Play Game</router-link>
-      <router-link @click="categoryCount" to="/board">Make New Game Board</router-link>
+      <router-link to="/game">Play Game</router-link>
+      <router-link to="/board">Make New Game Board</router-link>
     </div>
-    <RouterView :categoryCount="categoryCount" :categoryNumber="categoryNumber"></RouterView>
+    <RouterView></RouterView>
     <div id="game-box">
     <h3>Your Games:</h3>
       <ul>
@@ -21,7 +21,7 @@
 
 <script>
 
-import { getGames, deleteGames } from '../services/api';
+import { getGames, deleteGame } from '../services/api';
 
 export default {
   props: {
@@ -30,8 +30,7 @@ export default {
   },
   data() {
     return {
-      games: null,
-      categoryNumber: null
+      games: null
     };
   },
   created() {
@@ -44,31 +43,29 @@ export default {
       });
   },
   methods: {
-    categoryCount() {
-      this.categoryNumber++;
-    },
     handleDelete(i) {
       if(!confirm(`Are you sure you want to remove game ${this.games[i].class_name}`)) {
-        return;
+        return deleteGame(this.games[i].id)
+          .then(() => { this.$router.push('/');});
       }
-      console.log(this.games[i].id);
-      deleteGames(this.games[i].id);
-
+ 
     }
-
-
-    //     handleDelete() {
-    //   if(!confirm(`Are you sure you want to remove ${this.country.name} from your travel log?`)) {
-    //     return;
-    //   }
-
-    //   return api.deleteCountry(this.country.id)
-    //     .then(() => {
-    //       this.$router.push('/countries');
-    //     });
-    // },
   }
 };
+
+
+//     handleDelete() {
+//   if(!confirm(`Are you sure you want to remove ${this.country.name} from your travel log?`)) {
+//     return;
+//   }
+
+//   return api.deleteCountry(this.country.id)
+//     .then(() => {
+//       this.$router.push('/countries');
+//     });
+// },
+  
+
 </script>
 
 <style>

@@ -25,7 +25,7 @@
 
 <script>
 
-import { addTeam, addTeamGame, getTeams, startGame } from '../services/api';
+import { addTeam, addTeamGame, getTeams } from '../services/api';
 
 export default {
   data() {
@@ -47,9 +47,6 @@ export default {
 
   methods: {
     handleNext() {
-      let turn = this.teams[0].id;
-      this.gameId = this.$route.params.id;
-      startGame(this.gameId, turn);
       this.$router.push(`/game/${this.gameId}/instructions`);
     },
     handleSubmit() {
