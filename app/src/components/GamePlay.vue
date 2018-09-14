@@ -1,4 +1,3 @@
-git a
 <template>
   <main>
     <div class="container">
@@ -32,7 +31,7 @@ git a
         </ul>
       </div>
 
-      <h3 :turn="turn">It is Team {{ turn[0].team }}'s turn</h3>
+      <!-- <h3 :turn="turn">It is Team {{ turn[0].team }}'s turn</h3> -->
     </div>
   
   </main>
