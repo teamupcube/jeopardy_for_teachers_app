@@ -3,7 +3,7 @@
       <router-link :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</router-link><br/>
       <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link><br/>
       <router-link :to="`/board/${board}/categories/${category}/your-board`">Your Board</router-link>
-      <div v-if="previousClue">
+      <div class="last-saved-clue" v-if="previousClue">
         <p>Your previous clue, answer, and point value were saved as:</p>
         <ul>
           <li>Clue: {{ previousClue.clue }}</li>
@@ -91,9 +91,9 @@ export default {
   margin: 3%;
 }
 
-#saved-clue { 
+.last-saved-clue { 
   text-align: center;
-  margin-top: 5%;
+  margin: 5%;
 }
 
 </style>

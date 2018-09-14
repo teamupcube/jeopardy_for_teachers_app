@@ -30,13 +30,6 @@
             <button class="modal-default-button" @click="showAnswer = true">
                 Show Answer
             </button>
-            <br>
-              <button class="modal-default-button" @click="showAnswer = true">
-                Incorrect
-            </button>
-            <button class="modal-default-button" @click="showAnswer = true">
-               Incorrect
-            </button>
           </h2>
       </Modal>
     </div>
@@ -146,6 +139,7 @@ export default {
   width: 100%;
   text-align: center;
   padding: 10px 0px;
+  font-size: 1.5em;
 
 }
 
@@ -163,6 +157,7 @@ export default {
   width: 100%;
   text-align: center;
   padding: 15px 0px;
+  font-size: 1.5em;
 }
 
 .box-clue {
@@ -172,6 +167,8 @@ export default {
   width: 100%;
   text-align: center;
   padding: 10px 0px;
+  font-size: 1.5em;
+  margin: 2px 0;
 }
 
 .leaderboard {

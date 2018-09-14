@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>{{ label }}</h2>
+    <div class="auth-toggle">
     <button @click="type = isSignUp ? 'signIn' : 'signUp'">
       {{
         isSignUp
@@ -8,16 +9,18 @@
           : "New? Click here to sign up!"
       }}
       </button>
+    </div>
       <pre>{{ error }}</pre>
       <form @submit.prevent="handleSubmit">
         <label>
           Username:
-          <input v-model="credentials.name">
+          <input class="login" v-model="credentials.name">
         </label>
         <br>
         <label>
           Password:
           <input 
+            class="login"
             :type="show ? 'text' : 'password'"
             v-model="credentials.password">
         </label>
@@ -28,7 +31,7 @@
         {{ show ? 'Hide' : 'Show' }}
         </button>
         <br>
-        <button type="submit">
+        <button type="submit" class="login">
           Submit
         </button>
       </form>
@@ -87,5 +90,14 @@ export default {
 </script>
 
 <style>
+.auth-toggle {
+  text-align: center;
+  margin: -1% 0 5% 0;
+}
+
+.login {
+   margin-bottom: 1%;
+ }
+
 
 </style>

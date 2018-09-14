@@ -1,7 +1,7 @@
 <template>
-  <div class="custom-clue">
+  <div class="clue-form">
     <form @submit.prevent="handleSubmit" v-if="category">
-      <div>Clue: 
+      <div class="clue-input">Clue: 
         <input 
         type="text" 
         name="clue" 
@@ -10,7 +10,7 @@
         v-model="clue" 
         required>
       </div>
-      <div>Answer: 
+      <div class="clue-input">Answer: 
         <input 
         type="text" 
         name="answer" 
@@ -65,12 +65,13 @@ export default {
 </script>
 
 <style scoped>
-.custom-clue {
-  text-align: center;
+
+.clue-input {
+  margin: 10px;
 }
 
-input {
-  margin: 2%;
+.clue-form {
+  margin-top: 3%;
 }
 
 </style>

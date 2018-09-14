@@ -80,7 +80,7 @@ export default {
 
 .container {
   display: grid;
-  grid-template-columns: 15vw 15vw 15vw 15vw 15vw 15vw;
+  grid-template-columns: auto auto auto auto auto auto;
   grid-column-gap: 1vw;
 }
 

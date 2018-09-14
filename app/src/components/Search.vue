@@ -79,7 +79,7 @@ export default {
 <style>
 #search-results {
   text-align: center;
-  width: 70%;
+  width: 50%;
   margin: 60px auto;
 }
 
