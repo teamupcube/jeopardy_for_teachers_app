@@ -11,25 +11,21 @@
           <li>Value: {{ previousClue.value }}</li>
         </ul>
       </div>
-    <!-- <RouterView :categoryNumber="categoryNumber" :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView> -->
-    <RouterView :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
-  
+    <RouterView :categoryNumber="categoryNumber" :onAdd="handleCustomClue" :category="category" :addCustomClue="handleCustomClue" :historicClues="clues" :onSearch="handleSearch"></RouterView>
   </div>
 </template>
 
 <script>
-import { getData, addClue } from '../services/api';
+import { getData, addClue, categoryCount } from '../services/api';
 
 export default {
-  props: {
-    catgoryNumber: Number
-  },
   data() {
     return {
       clues: null,
       keywords: '',
       clueNumber: null,
-      previousClue: null
+      previousClue: null,
+      categoryNumber: null
     };
   },
   created() {
@@ -50,25 +46,23 @@ export default {
         });
     },
     handleCustomClue(clue, answer, value, view) {
-      this.clueNumber++;
-      console.log('clueNumber', this.clueNumber);
-      console.log('make category route', this.category);
+      console.log('handleClue clueNumber', this.clueNumber);
+      console.log('handleClue categoryNumber', this.category);
       return addClue(clue, answer, value, this.category)
         .then(saved => {
+          this.clueNumber++;
           this.previousClue = saved;
           this.clue = '';
           this.answer = '';
           this.value = null;
+          this.categoryNumber = 0;
           console.log('prev clue', this.previousClue);
-          if(this.clueNumber < 5 && this.categoryNumber < 6) {
-            this.$router.push(`/board/${this.board}/categories/${this.category}/${view}`);
-          } 
-          else if(this.clueNumber >= 5 && this.categoryNumber < 6) {
-            this.$router.push(`/board/${this.board}`);
+          if(this.categoryNumber >= 6) {
+            return categoryCount(0);
+            alert('error');
           }
-          else {
-            this.$router.push(`/board/${this.board}/categories/${this.category}/your-board`);
-          }
+          console.log('add clueNumber', this.clueNumber);
+          console.log('add categoryNumber', this.category);
         });
     },
     handleAdd(clue, answer, value) {

@@ -3,8 +3,8 @@
     <h1>Dashboard</h1>
     <br>
     <router-link to="/game">Play Game</router-link>
-    <router-link @click="categoryCount" to="/board">Make New Game Board</router-link>
-    <RouterView :categoryCount="categoryCount" :categoryNumber="categoryNumber"></RouterView>
+    <router-link to="/board">Make New Game Board</router-link>
+    <RouterView></RouterView>
     <h3>Your Games:</h3>
     <ul>
       <li v-for="(game, i) in games" :key="game.id">
@@ -41,9 +41,6 @@ export default {
       });
   },
   methods: {
-    categoryCount() {
-      this.categoryNumber++;
-    },
     handleDelete(i) {
       if(!confirm(`Are you sure you want to remove game ${this.games[i].class_name}`)) {
         return;

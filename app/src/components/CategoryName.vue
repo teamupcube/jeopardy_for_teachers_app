@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { categoryCount, addCategory, getCategories } from '../services/api';
+import { addCategory, getCategories } from '../services/api';
 
 export default {
 
@@ -37,15 +37,9 @@ export default {
   methods: {
     handleAddCategory() {
       this.board = this.$route.params.id;
-      categoryCount(this.categoryNumber);
-      console.log('category categoryNumber', this.categoryNumber);
-      // this.categoryCount(this.categoryNumber);
       return addCategory(this.category, this.board)
         .then(saved => {
-          console.log('saved', saved);
           this.category = saved;
-          console.log('this.category', this.category.id);
-          console.log(`/board/${this.category.boardId}/categories/${this.category.id}/custom-clue`);
           this.$router.push(`/board/${this.category.boardId}/categories/${this.category.id}/custom-clue`);
         });
     }

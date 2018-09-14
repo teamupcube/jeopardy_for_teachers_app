@@ -203,8 +203,11 @@ export function getTurn(gameId) {
     .then(responseHandler);
 }
 
-export function categoryCount(categoryCount) {
-  return categoryCount++;
+export function getCategoryNumber(boardId) {
+  return fetch (`${BOARDS_URL}/categoryNumber/${boardId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
 }
 
 export function getBoardClues(boardId) {
