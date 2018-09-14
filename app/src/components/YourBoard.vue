@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import BoardModal from './Modal';
+import BoardModal from './BoardModal';
 import { getBoardClues, getBoardCategories } from '../services/api';
 
 export default {
