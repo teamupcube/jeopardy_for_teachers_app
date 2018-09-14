@@ -11,6 +11,7 @@ import Search from './components/Search';
 import CustomClue from './components/CustomClue';
 import Results from './components/Results';
 import GamePlay from './components/GamePlay';
+import YourBoard from './components/YourBoard';
 
 
 export default new VueRouter({
@@ -30,6 +31,7 @@ export default new VueRouter({
       children: [
         { path: 'custom-clue', component: CustomClue },
         { path: 'search', component: Search },
+        { path: 'your-board', component: YourBoard }
       ]
     },
     { path: '/results', component: Results },
