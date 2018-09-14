@@ -16,7 +16,7 @@
       <Modal v-if="showModal" @close="showModal = false; showAnswer = false">
           <h3 slot="header"></h3>
           <h2 slot="body">{{ selectedClue.clue }} 
-            <div v-if="showAnswer===true">{{ selectedClue.answer }}</div>
+            <div class="answer" v-if="showAnswer===true">{{ selectedClue.answer }}</div>
             <button class="modal-default-button" @click="showAnswer = true">
                 Show Answer
             </button>
@@ -131,4 +131,7 @@ export default {
   justify-content: space-around
 }
 
+.answer {
+  margin: 20px;
+}
 </style>
