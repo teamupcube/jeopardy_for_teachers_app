@@ -88,14 +88,19 @@ ul {
   text-align: center;
   list-style: inside;
   margin-left: -50px;
-  padding-bottom: 3%;
+  padding-bottom: 1%;
+  list-style-type: none;
+}
+
+li {
+  margin: 7px;
 }
 
 #game-box {
   border: .2px solid black;
-  width: 35%;
-  margin: 10% auto;
-  padding: 1% 0 4% 0;
+  width: 25%;
+  margin: 7% auto;
+  padding: 1% 0 2% 0;
 }
 
 form {

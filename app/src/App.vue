@@ -53,13 +53,13 @@ export default {
   text-align: center;
   padding-top: 3%;
   padding-bottom: 3%;
-  font-size: 3em;
+  font-size: 4em;
   font-weight: bold;
 }
 
 h1 {
   text-align: center;
-  margin: 5%;
+  margin: 5% 0 2% 0;
 }
 
 header {
