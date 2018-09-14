@@ -48,7 +48,7 @@
 
 <script>
 import Modal from './Modal';
-import { getClues, getCategories, getScores, getTeams, newTurn, getTurn, startGame } from '../services/api';
+import { getClues, getCategories, getScores, getTeams, getTurn, setTurn } from '../services/api';
 
 export default {
   components: {
@@ -72,12 +72,11 @@ export default {
       this.selectedClue = clue;
       event.target.disabled = true;
       event.target.className = 'clicked-button';
+
       let changeTurn = function(turn, teams) {
         let teamLength = teams.length
-        
         for(let i=0; i<=teamLength-1; i=i+1) {
           if(i === teamLength-1) {
-            console.log("hi")
             turn[0].turn = teams[0].team;
             return turn;
           }
@@ -88,13 +87,18 @@ export default {
         }
         return turn;
       }      
+    
+
       changeTurn(this.turn, this.teams);
-      // newTurn(this.gameId, this.turn);
+        setTurn(this.gameId, this.turn[0].turn)
     },
     handleSelectTurn() {
       this.turn = this.selected;
       this.gameId = this.$route.params.id;
-      startGame(this.gameId, this.turn)
+      setTurn(this.gameId, this.turn)
+        .then(saved => {
+          this.turn = saved;
+        })
     }   
   },
   created() {
@@ -117,11 +121,11 @@ export default {
         // console.log(this.teams)
       });
     getTurn(this.gameId)
-        .then(saved => {
-          if(saved.length>0) {
-            this.turn = saved;
-          }
-        })
+      .then(saved => {
+        if(saved.length>0) {
+          this.turn = saved;
+        }
+      })
   }
 };
 </script>
