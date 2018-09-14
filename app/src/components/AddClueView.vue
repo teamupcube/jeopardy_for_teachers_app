@@ -1,7 +1,8 @@
 <template>
   <div id="app">
       <router-link :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</router-link><br/>
-      <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link>
+      <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link><br/>
+      <router-link :to="`/board/${board}/categories/${category}/your-board`">Your Board</router-link>
       <div v-if="previousClue">
         <p>Your previous clue, answer, and point value were saved as:</p>
         <ul>
@@ -59,11 +60,14 @@ export default {
           this.answer = '';
           this.value = null;
           console.log('prev clue', this.previousClue);
-          if(this.clueNumber < 5) {
+          if(this.clueNumber < 5 && this.categoryNumber < 6) {
             this.$router.push(`/board/${this.board}/categories/${this.category}/${view}`);
           } 
-          else {
+          else if(this.clueNumber >= 5 && this.categoryNumber < 6) {
             this.$router.push(`/board/${this.board}`);
+          }
+          else {
+            this.$router.push(`/board/${this.board}/categories/${this.category}/your-board`);
           }
         });
     },
