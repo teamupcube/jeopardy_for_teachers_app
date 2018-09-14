@@ -19,27 +19,26 @@
 </template>
 
 <script>
-import { addCategory, getCategories } from '../services/api';
+import { categoryCount, addCategory, getCategories } from '../services/api';
 
 export default {
-  props: {
-    categoryNumber: Number,
-    categoryCount: Function
-  },
+
   data() {
     return {
-      category: ''
+      category: '',
+      categoryNumber: ''
     };
   },
   created() {
     this.board = this.$route.params.id;
-    console.log(this.board)
-    getCategories(this.board)
+    console.log(this.board);
+    getCategories(this.board);
   },
   methods: {
     handleAddCategory() {
-      console.log('category categoryNumber', this.categoryNumber);
       this.board = this.$route.params.id;
+      categoryCount(this.categoryNumber);
+      console.log('category categoryNumber', this.categoryNumber);
       // this.categoryCount(this.categoryNumber);
       return addCategory(this.category, this.board)
         .then(saved => {

@@ -202,3 +202,7 @@ export function getTurn(gameId) {
   })
     .then(responseHandler);
 }
+
+export function categoryCount(categoryCount) {
+  return categoryCount++;
+}
