@@ -180,7 +180,7 @@ export function getScores(gameId) {
     .then(responseHandler);
 }
 
-export function deleteGames(gameId) {
+export function deleteGame(gameId) {
   return fetch(`${URL}/delete-game/${gameId}`, {
     method: 'DELETE',
     headers: getHeaders()
@@ -224,3 +224,4 @@ export function getBoardCategories(boardId) {
   })
     .then(responseHandler);
 }
+

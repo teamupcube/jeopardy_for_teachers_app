@@ -18,7 +18,7 @@
 
 <script>
 
-import { getGames, deleteGames } from '../services/api';
+import { getGames, deleteGame } from '../services/api';
 
 export default {
   props: {
@@ -42,26 +42,27 @@ export default {
   methods: {
     handleDelete(i) {
       if(!confirm(`Are you sure you want to remove game ${this.games[i].class_name}`)) {
-        return;
+        return deleteGame(this.games[i].id)
+          .then(() => { this.$router.push('/');});
       }
-      console.log(this.games[i].id);
-      deleteGames(this.games[i].id);
-
+ 
     }
-
-
-    //     handleDelete() {
-    //   if(!confirm(`Are you sure you want to remove ${this.country.name} from your travel log?`)) {
-    //     return;
-    //   }
-
-    //   return api.deleteCountry(this.country.id)
-    //     .then(() => {
-    //       this.$router.push('/countries');
-    //     });
-    // },
   }
 };
+
+
+//     handleDelete() {
+//   if(!confirm(`Are you sure you want to remove ${this.country.name} from your travel log?`)) {
+//     return;
+//   }
+
+//   return api.deleteCountry(this.country.id)
+//     .then(() => {
+//       this.$router.push('/countries');
+//     });
+// },
+  
+
 </script>
 
 <style scoped>
