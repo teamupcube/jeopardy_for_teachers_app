@@ -180,7 +180,7 @@ export function getScores(gameId) {
     .then(responseHandler);
 }
 
-export function deleteGames(gameId) {
+export function deleteGame(gameId) {
   return fetch(`${URL}/delete-game/${gameId}`, {
     method: 'DELETE',
     headers: getHeaders()
@@ -203,14 +203,25 @@ export function getTurn(gameId) {
     .then(responseHandler);
 }
 
-export function addTurn(gameId, turn) {
-  return fetch(`${URL}/game/${gameId}/add-turn/${turn}`, {
-    method: 'PUT',
+export function getCategoryNumber(boardId) {
+  console.log('get number called', boardId);
+  return fetch (`${BOARDS_URL}/categoryNumber/${boardId}`, {
     headers: getHeaders()
   })
     .then(responseHandler);
 }
 
-export function categoryCount(categoryCount) {
-  return categoryCount++;
+export function getBoardClues(boardId) {
+  return fetch (`${BOARDS_URL}/clues/${boardId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
 }
+
+export function getBoardCategories(boardId) {
+  return fetch (`${BOARDS_URL}/categories/${boardId}`, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+

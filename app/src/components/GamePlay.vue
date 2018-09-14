@@ -81,23 +81,23 @@ export default {
       event.target.className = 'clicked-button';
 
       let changeTurn = function(turn, teams) {
-        let teamLength = teams.length
-        for(let i=0; i<=teamLength-1; i=i+1) {
-          if(i === teamLength-1) {
+        let teamLength = teams.length;
+        for(let i = 0; i <= teamLength - 1; i = i + 1) {
+          if(i === teamLength - 1) {
             turn[0].turn = teams[0].team;
             return turn;
           }
           if(turn[0].turn === teams[i].team) {
-            turn[0].turn = teams[i+1].team;
+            turn[0].turn = teams[i + 1].team;
             return turn;
           }
         }
         return turn;
-      }      
+      };      
     
 
       changeTurn(this.turn, this.teams);
-        setTurn(this.gameId, this.turn[0].turn)
+      setTurn(this.gameId, this.turn[0].turn);
     },
     handleSelectTurn() {
       this.turn = this.selected;
@@ -105,7 +105,7 @@ export default {
       setTurn(this.gameId, this.turn)
         .then(saved => {
           this.turn = saved;
-        })
+        });
     }   
   },
   created() {
@@ -130,10 +130,10 @@ export default {
       });
     getTurn(this.gameId)
       .then(saved => {
-        if(saved.length>0) {
+        if(saved.length > 0) {
           this.turn = saved;
         }
-      })
+      });
   }
 };
 </script>

@@ -53,7 +53,7 @@ export default {
       this.gameId = this.$route.params.id;
       return addTeam(this.teamName)
         .then(saved => {
-          this.teams.push(saved)
+          this.teams.push(saved);
           this.team = saved;
           addTeamGame(this.team.teamId, this.gameId);
         });
