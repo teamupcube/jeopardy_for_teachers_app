@@ -31,11 +31,14 @@
                 Show Answer
             </button>
             <br>
-              <button class="modal-default-button" @click="showAnswer = true">
-                Incorrect
+            <button class="modal-default-button" @click="handleRightAnswer">
+              Correct
             </button>
-            <button class="modal-default-button" @click="showAnswer = true">
-               Incorrect
+            <button class="modal-default-button" @click="handleWrongAnswer = true">
+              Incorrect
+            </button>
+            <button class="modal-default-button" @click="handleNoAnswer = true">
+              No Answer
             </button>
           </h2>
       </Modal>
@@ -70,16 +73,23 @@ export default {
       showAnswer: false,
       teams: [],
       turn: null,
-      selected: null
+      selected: null,
     };
   },
   methods: {
-    handleClick(clue, event) {
-      this.showModal = true;
-      this.selectedClue = clue;
-      event.target.disabled = true;
-      event.target.className = 'clicked-button';
-
+    handleRightAnswer() {
+      let changeScore = function(turn, scores) { 
+        for(let i=0; i<scores.length; i++) {
+          if(turn[0].turn === scores[i].team) {
+            console.log(i)
+          }
+        }
+      }
+      changeScore(this.turn, this.scores)
+        
+      console.log("score",this.scores)
+      console.log("turn",this.turn)
+      console.log("teams",this.teams)
       let changeTurn = function(turn, teams) {
         let teamLength = teams.length;
         for(let i = 0; i <= teamLength - 1; i = i + 1) {
@@ -94,10 +104,34 @@ export default {
         }
         return turn;
       };      
-    
-
       changeTurn(this.turn, this.teams);
-      setTurn(this.gameId, this.turn[0].turn);
+      setTurn(this.gameId, this.turn[0].turn)
+    },
+    // handleWrongAnswer()
+    // handleNoAnswer()
+    handleClick(clue, event) {
+      this.showModal = true;
+      this.selectedClue = clue;
+      event.target.disabled = true;
+      event.target.className = 'clicked-button';
+      // let changeTurn = function(turn, teams) {
+      //   console.log(turn[0].turn)
+      //   let teamLength = teams.length;
+      //   for(let i = 0; i <= teamLength - 1; i = i + 1) {
+      //     if(i === teamLength - 1) {
+      //       turn[0].turn = teams[0].team;
+      //       return turn;
+      //     }
+      //     if(turn[0].turn === teams[i].team) {
+      //       turn[0].turn = teams[i + 1].team;
+      //       return turn;
+      //     }
+      //   }
+      //   return turn;
+      // };      
+      // changeTurn(this.turn, this.teams);
+      // setTurn(this.gameId, this.turn[0].turn)
+
     },
     handleSelectTurn() {
       this.turn = this.selected;
@@ -126,12 +160,13 @@ export default {
     getTeams(this.gameId) 
       .then(saved => {
         this.teams = saved;
-        // console.log(this.teams)
       });
     getTurn(this.gameId)
       .then(saved => {
         if(saved.length > 0) {
           this.turn = saved;
+          this.currentTurn = saved[0];
+          console.log(this.currentTurn)
         }
       });
   }
