@@ -204,6 +204,7 @@ export function getTurn(gameId) {
 }
 
 export function getCategoryNumber(boardId) {
+  console.log('get number called', boardId);
   return fetch (`${BOARDS_URL}/categoryNumber/${boardId}`, {
     headers: getHeaders()
   })

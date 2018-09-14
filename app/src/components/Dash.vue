@@ -27,8 +27,7 @@ export default {
   },
   data() {
     return {
-      games: null,
-      categoryNumber: null
+      games: null
     };
   },
   created() {

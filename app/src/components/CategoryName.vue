@@ -25,8 +25,7 @@ export default {
 
   data() {
     return {
-      category: '',
-      categoryNumber: ''
+      category: ''
     };
   },
   created() {

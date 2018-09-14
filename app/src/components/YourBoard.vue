@@ -1,6 +1,7 @@
 <template>
   <main>
     <h2>Your Board</h2>
+    <p v-if="message">{{ message }}</p>
     <p>Board: {{ boardId }}</p>
     <div class="container">
       <div v-if="categories" 
@@ -32,6 +33,9 @@ import Modal from './Modal';
 import { getBoardClues, getBoardCategories } from '../services/api';
 
 export default {
+  props: {
+    message: String
+  },
   components: {
     Modal,
   },
