@@ -27,8 +27,21 @@
           <h3 slot="header"></h3>
           <h2 slot="body">{{ selectedClue.clue }} 
             <div class="answer" v-if="showAnswer===true">{{ selectedClue.answer }}</div>
-            <button class="modal-default-button" @click="showAnswer = true">
+            <button v-if="!showAnswer" class="modal-default-button" @click="showAnswer = true">
                 Show Answer
+            </button>
+            <button v-if="showAnswer" class="modal-default-button" @click="showAnswer = false">
+              Hide Answer
+            </button>
+            <br>
+            <button v-if="showAnswer" class="modal-default-button" @click="handleRightAnswer">
+              Correct
+            </button>
+            <button v-if="showAnswer" class="modal-default-button" @click="handleWrongAnswer">
+              Incorrect
+            </button>
+            <button v-if="showAnswer" class="modal-default-button" @click="handleNoAnswer">
+              No Answer
             </button>
           </h2>
       </Modal>
@@ -48,7 +61,7 @@
 
 <script>
 import Modal from './Modal';
-import { getClues, getCategories, getScores, getTeams, getTurn, setTurn } from '../services/api';
+import { getClues, getCategories, getScores, getTeams, getTurn, setTurn, setScore } from '../services/api';
 
 export default {
   components: {
@@ -67,30 +80,107 @@ export default {
     };
   },
   methods: {
+    handleRightAnswer() {
+      //Update score and send new score to the DB
+      let changeScore = function(turn, scores, clueValue) {
+        for(let i=0;i<scores.length;i++){
+          if(turn === scores[i].team){
+            scores[i].score += clueValue;
+            setScore(scores[i].id, scores[i].score);
+            return scores;
+          }
+        }
+      }
+      changeScore(this.turn[0].turn, this.scores, this.selectedClue.value);
+      //Changes the turn to the next team
+      let changeTurn = function(turn, teams) {
+        let teamLength = teams.length;
+        for(let i=0; i<=teamLength-1; i++) {
+          if(i === teamLength-1) {
+            turn[0].turn = teams[0].team;
+            return turn;
+          }
+          if(turn[0].turn === teams[i].team) {
+            turn[0].turn=teams[i+1].team;
+            return turn;
+          }
+        }
+      };          
+      changeTurn(this.turn, this.teams);
+      //PUT request to set new turn in DB
+      setTurn(this.gameId, this.turn[0].turn);
+    },
+    handleWrongAnswer() {
+      //Update score and send new score to the DB
+      let changeScore = function(turn, scores, clueValue) {
+        for(let i=0;i<scores.length;i++){
+          if(turn === scores[i].team){
+            scores[i].score -= clueValue;
+            setScore(scores[i].id, scores[i].score);
+            return scores;
+          }
+        }
+      }
+      changeScore(this.turn[0].turn, this.scores, this.selectedClue.value);
+      //Changes the turn to the next team
+      let changeTurn = function(turn, teams) {
+        let teamLength = teams.length;
+        for(let i=0; i<=teamLength-1; i++) {
+          if(i === teamLength-1) {
+            turn[0].turn = teams[0].team;
+            return turn;
+          }
+          if(turn[0].turn === teams[i].team) {
+            turn[0].turn=teams[i+1].team;
+            return turn;
+          }
+        }
+      };          
+      changeTurn(this.turn, this.teams);
+      //PUT request to set new turn in DB
+      setTurn(this.gameId, this.turn[0].turn);
+    },
+    handleNoAnswer() {
+      //Changes the turn to the next team
+      let changeTurn = function(turn, teams) {
+        let teamLength = teams.length;
+        for(let i=0; i<=teamLength-1; i++) {
+          if(i === teamLength-1) {
+            turn[0].turn = teams[0].team;
+            return turn;
+          }
+          if(turn[0].turn === teams[i].team) {
+            turn[0].turn=teams[i+1].team;
+            return turn;
+          }
+        }
+      };          
+      changeTurn(this.turn, this.teams);
+      //PUT request to set new turn in DB
+      setTurn(this.gameId, this.turn[0].turn);
+    },
     handleClick(clue, event) {
       this.showModal = true;
       this.selectedClue = clue;
       event.target.disabled = true;
       event.target.className = 'clicked-button';
 
-      let changeTurn = function(turn, teams) {
-        let teamLength = teams.length;
-        for(let i = 0; i <= teamLength - 1; i = i + 1) {
-          if(i === teamLength - 1) {
-            turn[0].turn = teams[0].team;
-            return turn;
-          }
-          if(turn[0].turn === teams[i].team) {
-            turn[0].turn = teams[i + 1].team;
-            return turn;
-          }
-        }
-        return turn;
-      };      
-    
-
-      changeTurn(this.turn, this.teams);
-      setTurn(this.gameId, this.turn[0].turn);
+      // let changeTurn = function(turn, teams) {
+      //   let teamLength = teams.length;
+      //   for(let i = 0; i <= teamLength - 1; i = i + 1) {
+      //     if(i === teamLength - 1) {
+      //       turn[0].turn = teams[0].team;
+      //       return turn;
+      //     }
+      //     if(turn[0].turn === teams[i].team) {
+      //       turn[0].turn = teams[i + 1].team;
+      //       return turn;
+      //     }
+      //   }
+      //   // return turn;
+      // };          
+      // changeTurn(this.turn, this.teams);
+      // setTurn(this.gameId, this.turn[0].turn);
     },
     handleSelectTurn() {
       this.turn = this.selected;

@@ -196,6 +196,14 @@ export function setTurn(gameId, turn) {
     .then(responseHandler);
 }
 
+export function setScore(teamId, newScore) {
+  return fetch(`${URL}/team-id/${teamId}/set-score/${newScore}`, {
+    method: 'PUT',
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
 export function getTurn(gameId) {
   return fetch(`${URL}/get-turn/${gameId}`, {
     headers: getHeaders()

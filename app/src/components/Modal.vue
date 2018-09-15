@@ -19,14 +19,8 @@
 
           <div class="modal-footer">
             <slot name="footer">
-                            <button class="score-buttons" @click="$emit('close')">
-                Correct
-              </button>
-                            <button class="score-buttons" @click="$emit('close')">
-                Incorrect
-              </button>
-                            <button class="score-buttons" @click="$emit('close')">
-                No Answer
+              <button class="score-buttons" @click="$emit('close')">
+                Close
               </button>
             </slot>
           </div>
