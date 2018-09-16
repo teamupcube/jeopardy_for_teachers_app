@@ -17,7 +17,6 @@ export default {
   created() {
     getResults()
       .then(results => {
-        console.log(results);
         this.results = results;
       })
       .catch(err => {
