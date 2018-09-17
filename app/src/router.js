@@ -13,7 +13,6 @@ import Results from './components/Results';
 import GamePlay from './components/GamePlay';
 import YourBoard from './components/YourBoard';
 
-
 export default new VueRouter({
   mode: 'history',
   routes: [
@@ -38,6 +37,3 @@ export default new VueRouter({
     { path: '*', redirect: '/' }
   ]
 });
-
-
-

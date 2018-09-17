@@ -34,9 +34,6 @@ export default {
       teams: []
     };
   },
-  props: {
-
-  },
   created() {
     this.gameId = this.$route.params.id;
     getTeams(this.gameId) 
@@ -44,7 +41,6 @@ export default {
         this.teams = saved;
       });
   },
-
   methods: {
     handleNext() {
       this.$router.push(`/game/${this.gameId}/instructions`);
@@ -59,26 +55,24 @@ export default {
         });
     },
   },
-
 };
+
 </script>
 
 <style scoped>
 
-.team-list {
-  display: flex;
-  justify-content: space-around;
-  padding-top: 5%;
-}
+  .team-list {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 5%;
+  }
 
-.team-list h2 {
-  padding-bottom: 3%;
-}
+  .team-list h2 {
+    padding-bottom: 3%;
+  }
 
-.teams {
-  text-align: center;
-}
-
-
+  .teams {
+    text-align: center;
+  }
 
 </style>

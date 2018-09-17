@@ -10,7 +10,7 @@
           placeholder="Enter your keywords" 
           v-model="keywords"
           required>
-      <button @click="handleSubmit">Search</button>
+        <button @click="handleSubmit">Search</button>
       </div>
     </form>
     <div 
@@ -29,7 +29,7 @@
             <option :value="300">300</option>
             <option :value="400">400</option>
             <option :value="500">500</option>
-          </select>
+            </select>
           </label>
           <button @click="handleAdd" :value="historicClue.id">Add this clue to your board</button>
         </div>
@@ -70,29 +70,28 @@ export default {
       }
       this.onAdd(this.clue, this.answer, this.value, this.view);
     }
-
   }
-
 };
 </script>
 
 <style>
-#search-results {
-  text-align: center;
-  width: 50%;
-  margin: 60px auto;
-}
 
-#search-results p {
-  text-align: left;
-}
+  #search-results {
+    text-align: center;
+    width: 50%;
+    margin: 60px auto;
+  }
 
-.select-points {
-  margin-top: 4%;
-}
+  #search-results p {
+    text-align: left;
+  }
 
-.select-points button {
-  margin-left: 5%;
-}
+  .select-points {
+    margin-top: 4%;
+  }
 
+  .select-points button {
+    margin-left: 5%;
+  }
+  
 </style>

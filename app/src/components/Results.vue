@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 import { getResults } from '../services/api';
 
 export default {

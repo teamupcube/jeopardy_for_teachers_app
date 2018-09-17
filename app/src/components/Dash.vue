@@ -44,7 +44,6 @@ export default {
       });
   },
   methods: {
-    //Delete functionality not currently working
     handleDelete(i) {
       if(!confirm(`Are you sure you want to remove game ${this.games[i].class_name}`)) {
         return deleteGame(this.games[i].id)
@@ -52,65 +51,61 @@ export default {
       }
     },
     sendToGame(id) {
-      this.$router.push(`/game/${id}/gameplay`)
+      this.$router.push(`/game/${id}/gameplay`);
     }
   }
 };
-
-
-  
 
 </script>
 
 <style>
 
+  #options {
+    text-align: center;
+  }
 
-#options {
-  text-align: center;
-}
+  #options a {
+    margin: 0 2%;
+  }
 
-#options a {
-  margin: 0 2%;
-}
+  h2, h3, h4 {
+    text-align: center;
+    margin: 5% 0 2% 0;
+  }
 
-h2, h3, h4 {
-   text-align: center;
-   margin: 5% 0 2% 0;
-}
+  ul {
+    text-align: center;
+    list-style: inside;
+    margin-left: -50px;
+    padding-bottom: 1%;
+    list-style-type: none;
+  }
 
-ul {
-  text-align: center;
-  list-style: inside;
-  margin-left: -50px;
-  padding-bottom: 1%;
-  list-style-type: none;
-}
+  li {
+    margin: 7px;
+  }
 
-li {
-  margin: 7px;
-}
+  #game-box {
+    border: .2px solid black;
+    width: 25%;
+    margin: 7% auto;
+    padding: 1% 0 2% 0;
+  }
 
-#game-box {
-  border: .2px solid black;
-  width: 25%;
-  margin: 7% auto;
-  padding: 1% 0 2% 0;
-}
+  form {
+    text-align: center;
+  }
 
-form {
-  text-align: center;
-}
+  .dash-button {
+    border-radius: 5px;
+  }
 
-.dash-button {
-  border-radius: 5px;
-}
-
-#continue-button:hover {
-  background-color: rgb(89, 250, 89);
-  
-}
-#delete-button:hover {
-  background-color: rgb(253, 98, 98);
-}
+  #continue-button:hover {
+    background-color: rgb(89, 250, 89);
+    
+  }
+  #delete-button:hover {
+    background-color: rgb(253, 98, 98);
+  }
 
 </style>

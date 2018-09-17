@@ -27,7 +27,6 @@
 
 <script>
 
-
 import { getBoards, addGame } from '../services/api';
 
 export default {
@@ -45,11 +44,6 @@ export default {
       return this.game === undefined;
     }
   },
-  // created() {
-  //   const game = this.game;
-  //   if(this.isNew) return;
-  //   this.className = game.className;
-  // },
   created() {
     getBoards()
       .then(boards => {
@@ -72,10 +66,9 @@ export default {
           this.$router.push(`/game/${this.game.id}`);
         });
     }
-  },
-  components: {
   }
 };
+
 </script>
 
 <style>

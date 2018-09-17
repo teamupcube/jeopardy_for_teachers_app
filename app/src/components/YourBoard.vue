@@ -26,6 +26,7 @@
 </template>
 
 <script>
+
 import BoardModal from './BoardModal';
 import { getBoardClues, getBoardCategories } from '../services/api';
 
@@ -65,46 +66,48 @@ export default {
       });
   }
 };
+
 </script>
 
 <style>
-.clicked-button {
-  background-color: rgb(59, 59, 117);
-  color: white;
-  font-family: 'Courier New', Courier, monospace;
-  width: 100%;
-  text-align: center;
-  padding: 10px 0px;
 
-}
+  .clicked-button {
+    background-color: rgb(59, 59, 117);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
 
-.container {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
-  grid-column-gap: 1vw;
-}
+  }
 
-.box-cat {
-  background-color: rgb(48, 48, 162);
-  color: white;
-  font-family: 'Courier New', Courier, monospace;
-  width: 100%;
-  text-align: center;
-  padding: 15px 0px;
-}
+  .container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-column-gap: 1vw;
+  }
 
-.box-clue {
-  background-color: rgb(48, 48, 162);
-  color: white;
-  font-family: 'Courier New', Courier, monospace;
-  width: 100%;
-  text-align: center;
-  padding: 10px 0px;
-}
+  .box-cat {
+    background-color: rgb(48, 48, 162);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0px;
+  }
 
-.leaderboard {
-  display: flex;
-  justify-content: space-around
-}
+  .box-clue {
+    background-color: rgb(48, 48, 162);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+  }
+
+  .leaderboard {
+    display: flex;
+    justify-content: space-around
+  }
 
 </style>

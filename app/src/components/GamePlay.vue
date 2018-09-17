@@ -64,6 +64,7 @@
 </template>
 
 <script>
+
 import Modal from './Modal';
 import { 
   getClues, 
@@ -75,7 +76,7 @@ import {
   setScore, 
   setCluePlayed, 
   getCluesPlayed 
-  } from '../services/api';
+} from '../services/api';
 
 export default {
   components: {
@@ -94,22 +95,19 @@ export default {
       cluesPlayed: []
     };
   },
-  computed: {
-    
-  },
   methods: {
     //Applies the appropriate class to clue button depending on whether or not it has already been played. 
     clueClass(clueId) {
-      for(let i=0; i<this.cluesPlayed.length; i++) {
+      for(let i = 0; i < this.cluesPlayed.length; i++) {
         if(clueId === this.cluesPlayed[i].clue_id) {
-          return "clicked-button";
+          return 'clicked-button';
         }
       }
-      return "box-clue";
+      return 'box-clue';
     },
     //Disables clue button if the clues has already been played
     clueAlreadyPlayed(clueId){
-      for(let i=0; i<this.cluesPlayed.length; i++) {
+      for(let i = 0; i < this.cluesPlayed.length; i++) {
         if(clueId === this.cluesPlayed[i].clue_id) {
           return true;
         }
@@ -118,25 +116,25 @@ export default {
     handleRightAnswer() {
       //Update score and send new score to the DB
       let changeScore = function(turn, scores, clueValue) {
-        for(let i=0;i<scores.length;i++){
+        for(let i = 0;i < scores.length;i++){
           if(turn === scores[i].team){
             scores[i].score += clueValue;
             setScore(scores[i].id, scores[i].score);
             return scores;
           }
         }
-      }
+      };
       changeScore(this.turn[0].turn, this.scores, this.selectedClue.value);
       //Changes the turn to the next team
       let changeTurn = function(turn, teams) {
         let teamLength = teams.length;
-        for(let i=0; i<=teamLength-1; i++) {
-          if(i === teamLength-1) {
+        for(let i = 0; i <= teamLength - 1; i++) {
+          if(i === teamLength - 1) {
             turn[0].turn = teams[0].team;
             return turn;
           }
           if(turn[0].turn === teams[i].team) {
-            turn[0].turn=teams[i+1].team;
+            turn[0].turn = teams[i + 1].team;
             return turn;
           }
         }
@@ -148,25 +146,25 @@ export default {
     handleWrongAnswer() {
       //Update score and send new score to the DB
       let changeScore = function(turn, scores, clueValue) {
-        for(let i=0;i<scores.length;i++){
+        for(let i = 0;i < scores.length;i++){
           if(turn === scores[i].team){
             scores[i].score -= clueValue;
             setScore(scores[i].id, scores[i].score);
             return scores;
           }
         }
-      }
+      };
       changeScore(this.turn[0].turn, this.scores, this.selectedClue.value);
       //Changes the turn to the next team
       let changeTurn = function(turn, teams) {
         let teamLength = teams.length;
-        for(let i=0; i<=teamLength-1; i++) {
-          if(i === teamLength-1) {
+        for(let i = 0; i <= teamLength - 1; i++) {
+          if(i === teamLength - 1) {
             turn[0].turn = teams[0].team;
             return turn;
           }
           if(turn[0].turn === teams[i].team) {
-            turn[0].turn=teams[i+1].team;
+            turn[0].turn = teams[i + 1].team;
             return turn;
           }
         }
@@ -179,13 +177,13 @@ export default {
       //Changes the turn to the next team
       let changeTurn = function(turn, teams) {
         let teamLength = teams.length;
-        for(let i=0; i<=teamLength-1; i++) {
-          if(i === teamLength-1) {
+        for(let i = 0; i <= teamLength - 1; i++) {
+          if(i === teamLength - 1) {
             turn[0].turn = teams[0].team;
             return turn;
           }
           if(turn[0].turn === teams[i].team) {
-            turn[0].turn=teams[i+1].team;
+            turn[0].turn = teams[i + 1].team;
             return turn;
           }
         }
@@ -199,7 +197,7 @@ export default {
       this.selectedClue = clue;
       event.target.disabled = true;
       event.target.className = 'clicked-button';
-      setCluePlayed(this.selectedClue.id, this.gameId)
+      setCluePlayed(this.selectedClue.id, this.gameId);
     },
     handleSelectTurn() {
       this.turn = this.selected;
@@ -238,57 +236,60 @@ export default {
     getCluesPlayed(this.gameId)
       .then(saved => {
         this.cluesPlayed = saved;
-      })
+      });
   }
 };
+
 </script>
 
 <style>
-.clicked-button {
-  background-color: rgb(59, 59, 117);
-  color: white;
-  font-family: 'Courier New', Courier, monospace;
-  width: 100%;
-  text-align: center;
-  padding: 10px 0px;
-  font-size: 1.5em;
 
-}
+  .clicked-button {
+    background-color: rgb(59, 59, 117);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 1.5em;
 
-.container {
-  display: grid;
-  grid-template-columns: 15vw 15vw 15vw 15vw 15vw 15vw;
-  grid-column-gap: 1vw;
-  margin: 3%;
-}
+  }
 
-.box-cat {
-  background-color: rgb(48, 48, 162);
-  color: white;
-  font-family: 'Courier New', Courier, monospace;
-  width: 100%;
-  text-align: center;
-  padding: 15px 0px;
-  font-size: 1.5em;
-}
+  .container {
+    display: grid;
+    grid-template-columns: 15vw 15vw 15vw 15vw 15vw 15vw;
+    grid-column-gap: 1vw;
+    margin: 3%;
+  }
 
-.box-clue {
-  background-color: rgb(48, 48, 162);
-  color: white;
-  font-family: 'Courier New', Courier, monospace;
-  width: 100%;
-  text-align: center;
-  padding: 10px 0px;
-  font-size: 1.5em;
-  margin: 2px 0;
-}
+  .box-cat {
+    background-color: rgb(48, 48, 162);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0px;
+    font-size: 1.5em;
+  }
 
-.leaderboard {
-  display: flex;
-  justify-content: space-around
-}
+  .box-clue {
+    background-color: rgb(48, 48, 162);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 1.5em;
+    margin: 2px 0;
+  }
 
-.answer {
-  margin: 20px;
-}
+  .leaderboard {
+    display: flex;
+    justify-content: space-around
+  }
+
+  .answer {
+    margin: 20px;
+  }
+
 </style>
