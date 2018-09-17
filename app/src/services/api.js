@@ -176,6 +176,14 @@ export function getScores(gameId) {
     .then(responseHandler);
 }
 
+export function deleteTeamGame(gameId) {
+  return fetch(`${URL}/delete-team-game/${gameId}`, {
+    method: 'DELETE',
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
 export function deleteCluesPlayed(gameId) {
   return fetch(`${URL}/delete-clues-played/${gameId}`, {
     method: 'DELETE',
