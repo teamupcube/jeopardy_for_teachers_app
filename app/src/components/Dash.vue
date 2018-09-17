@@ -22,7 +22,7 @@
 
 <script>
 
-import { getGames, deleteGame } from '../services/api';
+import { getGames } from '../services/api';
 
 export default {
   props: {
@@ -44,15 +44,6 @@ export default {
       });
   },
   methods: {
-    handleDelete(i) {
-      if(confirm(`Are you sure you want to remove game ${this.games[i].class_name}`)) {
-        console.log('game', this.games[i].id);
-        // deleteTeamGame(this.games[i].id);
-        // deleteCluesPlayed(this.games[i].id);
-        return deleteGame(this.games[i].id)
-          .then(() => { this.$router.push('/');});
-      }
-    },
     sendToGame(id) {
       this.$router.push(`/game/${id}/gameplay`);
     }
