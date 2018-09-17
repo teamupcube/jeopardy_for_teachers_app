@@ -16,6 +16,7 @@
 </template>
 
 <script>
+
 import { addBoard } from '../services/api';
 export default {
   data() {
@@ -34,6 +35,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <style>

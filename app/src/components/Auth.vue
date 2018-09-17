@@ -2,7 +2,7 @@
   <div>
     <h2>{{ label }}</h2>
     <div class="auth-toggle">
-    <button @click="type = isSignUp ? 'signIn' : 'signUp'">
+      <button @click="type = isSignUp ? 'signIn' : 'signUp'">
       {{
         isSignUp
           ? "Already a user? Click here to sign in!"
@@ -30,16 +30,16 @@
         >
         {{ show ? 'Hide' : 'Show' }}
         </button>
-        <br>
+        <br/>
         <button type="submit" class="login">
           Submit
         </button>
       </form>
   </div>
-
 </template>
 
 <script>
+
 import { signUp, signIn } from '../services/api';
 
 export default {
@@ -87,17 +87,18 @@ export default {
     }
   }
 };
+
 </script>
 
 <style>
-.auth-toggle {
-  text-align: center;
-  margin: -1% 0 5% 0;
-}
 
-.login {
-   margin-bottom: 1%;
- }
+  .auth-toggle {
+    text-align: center;
+    margin: -1% 0 5% 0;
+  }
 
+  .login {
+    margin-bottom: 1%;
+  }
 
 </style>

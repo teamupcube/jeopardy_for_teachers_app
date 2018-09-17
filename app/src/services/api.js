@@ -4,7 +4,6 @@ const SEARCH_URL = `${URL}/search`;
 const GAMES_URL = `${URL}/games`;
 const BOARDS_URL = `${URL}/me/boards`;
 const TEAMS_URL = `${URL}/teams`;
-// const RESULTS_URL = `${URL}/results`;
 const GAME_URL = `${URL}/game`;
 
 function responseHandler(response) {
@@ -128,9 +127,6 @@ export function getData(keywords) {
   })
     .then(responseHandler);
 }
-// export function addHistoricCLue(historicClue) {
-//   return;
-// }
 
 export function addCategory(category, board) {
   console.log('api category', category, 'api board', board);
@@ -175,14 +171,6 @@ export function getCategories(gameId) {
 
 export function getScores(gameId) {
   return fetch (`${URL}/scores/${gameId}`, {
-    headers: getHeaders()
-  })
-    .then(responseHandler);
-}
-
-export function deleteGame(gameId) {
-  return fetch(`${URL}/delete-game/${gameId}`, {
-    method: 'DELETE',
     headers: getHeaders()
   })
     .then(responseHandler);
@@ -247,4 +235,3 @@ export function getBoardCategories(boardId) {
   })
     .then(responseHandler);
 }
-

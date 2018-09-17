@@ -9,10 +9,8 @@ import Instructions from './components/Instructions';
 import CategoryName from './components/CategoryName';
 import Search from './components/Search';
 import CustomClue from './components/CustomClue';
-import Results from './components/Results';
 import GamePlay from './components/GamePlay';
 import YourBoard from './components/YourBoard';
-
 
 export default new VueRouter({
   mode: 'history',
@@ -34,10 +32,6 @@ export default new VueRouter({
         { path: 'your-board', component: YourBoard }
       ]
     },
-    { path: '/results', component: Results },
     { path: '*', redirect: '/' }
   ]
 });
-
-
-

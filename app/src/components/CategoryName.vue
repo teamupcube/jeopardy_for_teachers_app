@@ -19,10 +19,10 @@
 </template>
 
 <script>
+
 import { addCategory, getCategories } from '../services/api';
 
 export default {
-
   data() {
     return {
       category: ''
@@ -48,13 +48,14 @@ export default {
 </script>
 
 <style>
-.category {
-  margin-top: 7%;
-}
 
-.category button {
-  margin-top: 2%;
-}
+  .category {
+    margin-top: 7%;
+  }
+
+  .category button {
+    margin-top: 2%;
+  }
 
 </style>
 

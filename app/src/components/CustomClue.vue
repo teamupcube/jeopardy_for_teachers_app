@@ -17,19 +17,19 @@
         placeholder="Answer"
         v-model="answer" 
         required>
-      <label>Select point value: 
-        <select 
-        name="value"
-        placeholder="Please choose a point value"
-        v-model="value"
-        required>
-        <option value="100">100</option>
-        <option value="200">200</option>
-        <option value="300">300</option>
-        <option value="400">400</option>
-        <option value="500">500</option>
-      </select>
-      </label>
+        <label>Select point value: 
+          <select 
+          name="value"
+          placeholder="Please choose a point value"
+          v-model="value"
+          required>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="300">300</option>
+          <option value="400">400</option>
+          <option value="500">500</option>
+          </select>
+        </label>
       </div>
       <button>Submit</button>
     </form>
@@ -44,7 +44,6 @@ export default {
     category: String,
     addCustomClue: Function
   },
-
   data() {
     return {
       clue: '',
@@ -53,7 +52,6 @@ export default {
       search: null
     };
   },
-
   methods: {
     handleSubmit() {
       this.view = 'custom-clue';
@@ -66,12 +64,12 @@ export default {
 
 <style scoped>
 
-.clue-input {
-  margin: 10px;
-}
+  .clue-input {
+    margin: 10px;
+  }
 
-.clue-form {
-  margin-top: 3%;
-}
+  .clue-form {
+    margin-top: 3%;
+  }
 
 </style>

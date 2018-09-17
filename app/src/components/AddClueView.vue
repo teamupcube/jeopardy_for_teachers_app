@@ -16,6 +16,7 @@
 </template>
 
 <script>
+
 import { getData, addClue, getCategoryNumber } from '../services/api';
 
 export default {
@@ -37,7 +38,6 @@ export default {
         this.categoryNumber = saved.count;
         console.log('cat', this.categoryNumber);
       });
-
   },
   methods: {
     handleSearch(keywords) {
@@ -76,24 +76,22 @@ export default {
             alert('an error has occured');
           }
         });
-    },
-    handleAdd(clue, answer, value) {
-      console.log('view', clue, answer, value);
-      
     }
   }
 };
+
 </script>
 
 <style>
-#clue-router {
-  text-align: center;
-  margin: 3%;
-}
 
-.last-saved-clue { 
-  text-align: center;
-  margin: 5%;
-}
+  #clue-router {
+    text-align: center;
+    margin: 3%;
+  }
+
+  .last-saved-clue { 
+    text-align: center;
+    margin: 5%;
+  }
 
 </style>
