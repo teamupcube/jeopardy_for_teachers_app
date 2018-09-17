@@ -196,6 +196,29 @@ export function setTurn(gameId, turn) {
     .then(responseHandler);
 }
 
+export function setScore(teamId, newScore) {
+  return fetch(`${URL}/team-id/${teamId}/set-score/${newScore}`, {
+    method: 'PUT',
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
+
+export function setCluePlayed(clueId, gameId) {
+  return fetch(`${URL}/clue-played/${clueId}/game/${gameId}`, {
+    method: 'POST',
+    headers: getHeaders(),
+  })
+    .then(responseHandler);
+}
+
+export function getCluesPlayed(gameId) {
+  return fetch(`${URL}/clues-played/game/${gameId}`, {
+    headers: getHeaders(),
+  })
+    .then(responseHandler);
+}
+
 export function getTurn(gameId) {
   return fetch(`${URL}/get-turn/${gameId}`, {
     headers: getHeaders()

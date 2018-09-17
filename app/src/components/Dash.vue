@@ -8,11 +8,12 @@
     </div>
     <RouterView></RouterView>
     <div id="game-box">
-    <h3>Your Games:</h3>
+    <h3>In Progress Games:</h3>
       <ul>
         <li v-for="(game, i) in games" :key="game.id">
-          {{ game.class_name }}
-          <button @click="handleDelete(i)">Delete</button>
+          {{ game.class_name }} 
+          <button class="dash-button" id="continue-button" @click="sendToGame(game.id)">Continue</button>
+          <button class="dash-button" id="delete-button" @click="handleDelete(i)">Delete</button>
         </li>
       </ul>
     </div>
@@ -43,27 +44,20 @@ export default {
       });
   },
   methods: {
+    //Delete functionality not currently working
     handleDelete(i) {
       if(!confirm(`Are you sure you want to remove game ${this.games[i].class_name}`)) {
         return deleteGame(this.games[i].id)
           .then(() => { this.$router.push('/');});
       }
- 
+    },
+    sendToGame(id) {
+      this.$router.push(`/game/${id}/gameplay`)
     }
   }
 };
 
 
-//     handleDelete() {
-//   if(!confirm(`Are you sure you want to remove ${this.country.name} from your travel log?`)) {
-//     return;
-//   }
-
-//   return api.deleteCountry(this.country.id)
-//     .then(() => {
-//       this.$router.push('/countries');
-//     });
-// },
   
 
 </script>
@@ -105,6 +99,18 @@ li {
 
 form {
   text-align: center;
+}
+
+.dash-button {
+  border-radius: 5px;
+}
+
+#continue-button:hover {
+  background-color: rgb(89, 250, 89);
+  
+}
+#delete-button:hover {
+  background-color: rgb(253, 98, 98);
 }
 
 </style>

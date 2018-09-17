@@ -3,9 +3,13 @@
     <div>
       <h3 v-if="turn">It is Team {{ turn[0].turn }}'s turn</h3>
       <form v-if="!turn" @submit.prevent="handleSelectTurn">
-        <h3>Who's wants to start first?</h3>
+        <h3>Who wants to start first?</h3>
         <select v-model="selected">
-          <option :selected="team.team" v-for="team in teams" :key="team.id">{{ team.team }}</option>
+          <option :selected="team.team" 
+            v-for="team in teams" 
+            :key="team.id">
+            {{ team.team }}
+          </option>
         </select>
         <button>Select</button>
       </form>
@@ -18,17 +22,32 @@
         <div class="box-cat">{{ category.category }}</div>
         <div v-for="clue in clues" 
           :key="clue.id">
-          <button v-if="category.category===clue.category" class="box-clue" id="show-modal" @click="($event) => handleClick(clue, $event)" :value="clue"> {{ clue.value }}</button>
+          <button v-if="category.category===clue.category" 
+            id="show-modal" 
+            @click="($event) => handleClick(clue, $event)" 
+            :value="clue"
+            :disabled="clueAlreadyPlayed(clue.id)"
+            :class="clueClass(clue.id)"> 
+            {{ clue.value }}
+          </button>
         </div>
       </div>
-    
-
       <Modal v-if="showModal" @close="showModal = false; showAnswer = false">
           <h3 slot="header"></h3>
           <h2 slot="body">{{ selectedClue.clue }} 
             <div class="answer" v-if="showAnswer===true">{{ selectedClue.answer }}</div>
-            <button class="modal-default-button" @click="showAnswer = true">
-                Show Answer
+            <button v-if="!showAnswer" class="modal-default-button" @click="showAnswer = true">
+              Show Answer
+            </button>
+            <br>
+            <button v-if="showAnswer" class="modal-default-button" @click="handleRightAnswer">
+              Correct
+            </button>
+            <button v-if="showAnswer" class="modal-default-button" @click="handleWrongAnswer">
+              Incorrect
+            </button>
+            <button v-if="showAnswer" class="modal-default-button" @click="handleNoAnswer">
+              No Answer
             </button>
           </h2>
       </Modal>
@@ -40,15 +59,23 @@
           <p>Team {{ score.team }} has {{ score.score }} points</p>
         </ul>
       </div>
-    </div>
-  
-  
+    </div>  
   </main>
 </template>
 
 <script>
 import Modal from './Modal';
-import { getClues, getCategories, getScores, getTeams, getTurn, setTurn } from '../services/api';
+import { 
+  getClues, 
+  getCategories, 
+  getScores, 
+  getTeams, 
+  getTurn, 
+  setTurn, 
+  setScore, 
+  setCluePlayed, 
+  getCluesPlayed 
+  } from '../services/api';
 
 export default {
   components: {
@@ -63,34 +90,116 @@ export default {
       showAnswer: false,
       teams: [],
       turn: null,
-      selected: null
+      selected: null,
+      cluesPlayed: []
     };
   },
+  computed: {
+    
+  },
   methods: {
+    //Applies the appropriate class to clue button depending on whether or not it has already been played. 
+    clueClass(clueId) {
+      for(let i=0; i<this.cluesPlayed.length; i++) {
+        if(clueId === this.cluesPlayed[i].clue_id) {
+          return "clicked-button";
+        }
+      }
+      return "box-clue";
+    },
+    //Disables clue button if the clues has already been played
+    clueAlreadyPlayed(clueId){
+      for(let i=0; i<this.cluesPlayed.length; i++) {
+        if(clueId === this.cluesPlayed[i].clue_id) {
+          return true;
+        }
+      }
+    },
+    handleRightAnswer() {
+      //Update score and send new score to the DB
+      let changeScore = function(turn, scores, clueValue) {
+        for(let i=0;i<scores.length;i++){
+          if(turn === scores[i].team){
+            scores[i].score += clueValue;
+            setScore(scores[i].id, scores[i].score);
+            return scores;
+          }
+        }
+      }
+      changeScore(this.turn[0].turn, this.scores, this.selectedClue.value);
+      //Changes the turn to the next team
+      let changeTurn = function(turn, teams) {
+        let teamLength = teams.length;
+        for(let i=0; i<=teamLength-1; i++) {
+          if(i === teamLength-1) {
+            turn[0].turn = teams[0].team;
+            return turn;
+          }
+          if(turn[0].turn === teams[i].team) {
+            turn[0].turn=teams[i+1].team;
+            return turn;
+          }
+        }
+      };          
+      changeTurn(this.turn, this.teams);
+      //PUT request to set new turn in DB
+      setTurn(this.gameId, this.turn[0].turn);
+    },
+    handleWrongAnswer() {
+      //Update score and send new score to the DB
+      let changeScore = function(turn, scores, clueValue) {
+        for(let i=0;i<scores.length;i++){
+          if(turn === scores[i].team){
+            scores[i].score -= clueValue;
+            setScore(scores[i].id, scores[i].score);
+            return scores;
+          }
+        }
+      }
+      changeScore(this.turn[0].turn, this.scores, this.selectedClue.value);
+      //Changes the turn to the next team
+      let changeTurn = function(turn, teams) {
+        let teamLength = teams.length;
+        for(let i=0; i<=teamLength-1; i++) {
+          if(i === teamLength-1) {
+            turn[0].turn = teams[0].team;
+            return turn;
+          }
+          if(turn[0].turn === teams[i].team) {
+            turn[0].turn=teams[i+1].team;
+            return turn;
+          }
+        }
+      };          
+      changeTurn(this.turn, this.teams);
+      //PUT request to set new turn in DB
+      setTurn(this.gameId, this.turn[0].turn);
+    },
+    handleNoAnswer() {
+      //Changes the turn to the next team
+      let changeTurn = function(turn, teams) {
+        let teamLength = teams.length;
+        for(let i=0; i<=teamLength-1; i++) {
+          if(i === teamLength-1) {
+            turn[0].turn = teams[0].team;
+            return turn;
+          }
+          if(turn[0].turn === teams[i].team) {
+            turn[0].turn=teams[i+1].team;
+            return turn;
+          }
+        }
+      };          
+      changeTurn(this.turn, this.teams);
+      //PUT request to set new turn in DB
+      setTurn(this.gameId, this.turn[0].turn);
+    },
     handleClick(clue, event) {
       this.showModal = true;
       this.selectedClue = clue;
       event.target.disabled = true;
       event.target.className = 'clicked-button';
-
-      let changeTurn = function(turn, teams) {
-        let teamLength = teams.length;
-        for(let i = 0; i <= teamLength - 1; i = i + 1) {
-          if(i === teamLength - 1) {
-            turn[0].turn = teams[0].team;
-            return turn;
-          }
-          if(turn[0].turn === teams[i].team) {
-            turn[0].turn = teams[i + 1].team;
-            return turn;
-          }
-        }
-        return turn;
-      };      
-    
-
-      changeTurn(this.turn, this.teams);
-      setTurn(this.gameId, this.turn[0].turn);
+      setCluePlayed(this.selectedClue.id, this.gameId)
     },
     handleSelectTurn() {
       this.turn = this.selected;
@@ -119,7 +228,6 @@ export default {
     getTeams(this.gameId) 
       .then(saved => {
         this.teams = saved;
-        // console.log(this.teams)
       });
     getTurn(this.gameId)
       .then(saved => {
@@ -127,6 +235,10 @@ export default {
           this.turn = saved;
         }
       });
+    getCluesPlayed(this.gameId)
+      .then(saved => {
+        this.cluesPlayed = saved;
+      })
   }
 };
 </script>
