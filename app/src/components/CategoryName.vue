@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="category">
-      <form @submit.prevent="handleAddCategory" class="category-form">
+      <form @submit.prevent="handleSubmit" class="category-form">
         <div>Category Name: 
           <input 
             type="text" 
@@ -28,18 +28,18 @@ export default {
       category: ''
     };
   },
-  created() {
-    this.board = this.$route.params.id;
-    console.log(this.board);
-    getCategories(this.board);
-  },
+  // // AFAICT not used
+  // created() {
+  //   this.board = this.$route.params.id;
+  //   console.log(this.board);
+  //   getCategories(this.board);
+  // },
   methods: {
-    handleAddCategory() {
-      this.board = this.$route.params.id;
-      return addCategory(this.category, this.board)
+    handleSubmit() {
+      const boardId = this.$route.params.id;
+      return addCategory(this.category, boardId)
         .then(saved => {
-          this.category = saved;
-          this.$router.push(`/board/${this.category.boardId}/categories/${this.category.id}/custom-clue`);
+          this.$router.push(`/board/${saved.boardId}/categories/${saved.id}/custom-clue`);
         });
     }
   }

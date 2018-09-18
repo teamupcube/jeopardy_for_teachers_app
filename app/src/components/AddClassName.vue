@@ -6,7 +6,7 @@
         <label v-if="boards" v-for="board in boards" 
           :key="board.id" 
           class="board">
-          <input type="radio" :value="board.id" v-model="boardId">
+          <input type="radio" name="boards" :value="board.id" v-model="boardId">
           {{ board.name }}
         </label>
       </ul>
@@ -36,7 +36,8 @@ export default {
     return {
       className: '',
       boards: null,
-      boardId: null
+      boardId: null,
+      error: null
     };
   },
   computed: {
@@ -55,7 +56,6 @@ export default {
   },
   methods: {
     handleSubmit() {
-      
       const game = {
         className: this.className,
         boardId: this.boardId
@@ -63,7 +63,10 @@ export default {
       return addGame(game)
         .then(saved => {
           this.game = saved;
-          this.$router.push(`/game/${this.game.id}`);
+          this.$router.push(`/game/${saved.id}`);
+        })
+        .catch(err => {
+          this.error = err;
         });
     }
   }

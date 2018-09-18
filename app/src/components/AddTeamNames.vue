@@ -1,8 +1,8 @@
 <template>
   <div class="teams">
-    <form @submit.prevent="handleSubmit">
+    <form v-if="teams.length < 4" @submit.prevent="handleSubmit">
       <div class="team-list">
-        <div v-if="teams.length<4">
+        <div>
           <h2>Add Teams</h2>
           <label>
             Team Name: <input type="text" v-model="teamName"> 
@@ -18,7 +18,7 @@
         {{ team.team }}
       </li>
     </ul>
-    <button @click="handleNext">Next</button>
+    <RouterLink v-if="teams.length > 1" :to="`/game/${this.gameId}/instructions`">Next</RouterLink>
   </div>
 
 </template>
@@ -31,27 +31,24 @@ export default {
   data() {
     return {
       teamName: '',
-      teams: []
+      teams: [],
+      gameId: this.$route.params.id
     };
   },
   created() {
-    this.gameId = this.$route.params.id;
     getTeams(this.gameId) 
-      .then(saved => {
-        this.teams = saved;
+      .then(teams => {
+        this.teams = teams;
       });
   },
   methods: {
-    handleNext() {
-      this.$router.push(`/game/${this.gameId}/instructions`);
-    },
+   
     handleSubmit() {
-      this.gameId = this.$route.params.id;
+      // This needs to happen in ONE server call
       return addTeam(this.teamName)
         .then(saved => {
           this.teams.push(saved);
-          this.team = saved;
-          addTeamGame(this.team.teamId, this.gameId);
+          addTeamGame(saved.teamId, this.gameId);
         });
     },
   },

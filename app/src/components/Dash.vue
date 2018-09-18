@@ -12,7 +12,8 @@
       <ul>
         <li v-for="(game, i) in games" :key="game.id">
           {{ game.class_name }} 
-          <button class="dash-button" id="continue-button" @click="sendToGame(game.id)">Continue</button>
+          <!-- prefer RouterLink when possible -->
+          <RouterLink class="dash-button" :to="`/game/${id}/gameplay`">Continue</RouterLink>
           <button class="dash-button" id="delete-button" @click="handleDelete(i)">Delete</button>
         </li>
       </ul>
@@ -44,9 +45,12 @@ export default {
       });
   },
   methods: {
-    handleDelete(i) {
+    handleDelete(index) {
+      // do this ONCE and store in variable
+      const game = this.games[index]
       if(confirm(`Are you sure you want to remove game ${this.games[i].class_name}`)) {
         console.log('game', this.games[i].id);
+        // These two deletes need to be a part of deleteGame on server!
         deleteCluesPlayed(this.games[i].id);
         deleteTeamGame(this.games[i].id);
         return deleteGame(this.games[i].id)
@@ -60,9 +64,6 @@ export default {
               });
           });
       }
-    },
-    sendToGame(id) {
-      this.$router.push(`/game/${id}/gameplay`);
     }
   }
 };

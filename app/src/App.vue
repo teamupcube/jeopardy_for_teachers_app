@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <p id="logo">Jeopardy!</p>
-    <header>
-      <a v-if="user" href="/">Home</a>
+    <header v-if="user">
+      <a href="/">Home</a>
+      <a href="/" @click.prevent="handleSignOut">Sign Out</a>
+      <router-link to="/board"></router-link>
+      <router-link to="/"></router-link>
+      <span class="user">user: {{ user.name }}</span> 
+    </header>
+    <header v-else>
       <RouterLink v-if="!user" to="/auth">Sign in</RouterLink>
-      <a v-if="user" href="/" @click.prevent="handleSignOut">Sign Out</a>
-      <router-link to="/board" v-if="user"></router-link>
-      <router-link v-if="user" to="/"></router-link>
-      <span class="user" v-if="user">user: {{ user.name }}</span> 
     </header>
     <RouterView class="routes" :onUser="handleUser" :user="user"></RouterView>
   </div>

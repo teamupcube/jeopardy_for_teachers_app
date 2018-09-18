@@ -61,14 +61,15 @@ export default {
     },
     handleAdd(event) {
       let clues = this.historicClues;
-      this.view = 'search';
+      
       for(let i = 0; i < clues.length; i++) {
         if(clues[i].id === parseInt(event.target.value)) {
           this.clue = clues[i].clue;
           this.answer = clues[i].answer;
         }
       }
-      this.onAdd(this.clue, this.answer, this.value, this.view);
+      
+      this.onAdd(this.clue, this.answer, this.value, 'search');
     }
   }
 };
