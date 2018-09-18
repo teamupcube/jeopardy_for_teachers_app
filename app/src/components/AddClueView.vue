@@ -1,8 +1,8 @@
 <template>
   <div id="clue-router">
-      <router-link :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</router-link><br/>
-      <router-link :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</router-link><br/>
-      <router-link :to="`/board/${board}/categories/${category}/your-board`">Your Board</router-link>
+      <RouterLink :to="`/board/${board}/categories/${category}/custom-clue`">Create Custom Clue</RouterLink><br/>
+      <RouterLink :to="`/board/${board}/categories/${category}/search`">Search Jeopardy Database for a Clue</RouterLink><br/>
+      <RouterLink :to="`/board/${board}/categories/${category}/your-board`">Your Board</RouterLink>
       <div class="last-saved-clue" v-if="previousClue">
         <p>Your previous clue, answer, and point value were saved as:</p>
         <ul>

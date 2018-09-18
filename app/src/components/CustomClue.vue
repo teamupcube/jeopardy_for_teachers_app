@@ -54,8 +54,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      this.view = 'custom-clue';
-      this.addCustomClue(this.clue, this.answer, this.value, this.view);
+      this.addCustomClue(this.clue, this.answer, this.value, 'custom-clue');
     }
   }
 };

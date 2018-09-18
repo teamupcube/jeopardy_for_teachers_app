@@ -9,15 +9,17 @@
       <p>If you choose not to answer, you neither loose nor gain points</p>
       <p>There is no double jeopardy or final jeopardy</p>
     </div>
-    <router-link :to="`/game/${this.gameId}/gameplay`">Next</router-link>
+    <RouterLink :to="`/game/${this.gameId}/gameplay`">Next</RouterLink>
   </div>
 </template>
 
 <script>
 
 export default {
-  created() {
-    this.gameId = this.$route.params.id;
+  data() {
+    return {
+      gameId: this.$route.params.id
+    };
   }
 };
 

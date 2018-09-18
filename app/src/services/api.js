@@ -77,6 +77,7 @@ export function signUp(credentials) {
   return fetch(`${AUTH_URL}/signup`, {
     method: 'POST',
     headers: getHeaders(),
+    // this is how you should be passing your request information, not the path
     body: JSON.stringify(credentials)
   })
     .then(responseHandler)
